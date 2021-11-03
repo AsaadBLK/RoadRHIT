@@ -16,9 +16,12 @@ class TeamPolicy
      * @param  \App\Models\User  $user
      * @return mixed
      */
-    public function viewAny(User $user)
+    public function viewAny(User $user, Team $team)
     {
-        return true;
+        //return true;
+        // $user->hasTeamRole($team, "admin");
+        //$user->belongsToTeam("admin");
+        return auth()->user()->current_team_id == 1 ? true : false;
     }
 
     /**
@@ -30,7 +33,9 @@ class TeamPolicy
      */
     public function view(User $user, Team $team)
     {
-        return $user->belongsToTeam($team);
+        //return $user->belongsToTeam($team);
+        return auth()->user()->current_team_id == 1 ? true : false;
+
     }
 
     /**
@@ -39,9 +44,9 @@ class TeamPolicy
      * @param  \App\Models\User  $user
      * @return mixed
      */
-    public function create(User $user)
+    public function create(User $user, Team $team)
     {
-        return true;
+        return auth()->user()->current_team_id == 1 ? true : false;
     }
 
     /**
@@ -53,7 +58,8 @@ class TeamPolicy
      */
     public function update(User $user, Team $team)
     {
-        return $user->ownsTeam($team);
+        return auth()->user()->current_team_id == 1 ? true : false;
+        //return $user->ownsTeam($team);
     }
 
     /**
@@ -65,7 +71,8 @@ class TeamPolicy
      */
     public function addTeamMember(User $user, Team $team)
     {
-        return $user->ownsTeam($team);
+        return auth()->user()->current_team_id == 1 ? true : false;
+        //return $user->ownsTeam($team);
     }
 
     /**
@@ -77,7 +84,8 @@ class TeamPolicy
      */
     public function updateTeamMember(User $user, Team $team)
     {
-        return $user->ownsTeam($team);
+        return auth()->user()->current_team_id == 1 ? true : false;
+        //return $user->ownsTeam($team);
     }
 
     /**
@@ -89,7 +97,8 @@ class TeamPolicy
      */
     public function removeTeamMember(User $user, Team $team)
     {
-        return $user->ownsTeam($team);
+        return auth()->user()->current_team_id == 1 ? true : false;
+        //return $user->ownsTeam($team);
     }
 
     /**
@@ -101,6 +110,7 @@ class TeamPolicy
      */
     public function delete(User $user, Team $team)
     {
-        return $user->ownsTeam($team);
+        return auth()->user()->current_team_id == 1 ? true : false;
+        //return $user->ownsTeam($team);
     }
 }
