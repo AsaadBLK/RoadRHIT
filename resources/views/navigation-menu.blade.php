@@ -5,8 +5,11 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
-                        <x-jet-application-mark class="block h-9 w-auto" />
+                   <a href="{{ route('dashboard') }}">
+                         @if (auth()->check())
+                        <img class="rounded img-fluid block h-9 w-auto" src="{{ Auth::user()->profile_photo_url ?? null}}" />
+                        @else <h2>Logo</h2>
+                        @endif
                     </a>
                 </div>
 

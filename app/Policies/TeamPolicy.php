@@ -19,8 +19,6 @@ class TeamPolicy
     public function viewAny(User $user, Team $team)
     {
         //return true;
-        // $user->hasTeamRole($team, "admin");
-        //$user->belongsToTeam("admin");
         return auth()->user()->current_team_id == 1 ? true : false;
     }
 
