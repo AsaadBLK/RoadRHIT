@@ -19,6 +19,7 @@ class CreateAccessoiresTable extends Migration
             $table->string('access_name');
             $table->string('access_etat');
             $table->string('access_commentaire');
+            $table->softDeletes();
         });
     }
 

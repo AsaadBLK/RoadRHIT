@@ -29,6 +29,7 @@ class CreateEmployesTable extends Migration
             $table->string('status_leave');
             $table->string('leave_at');
             $table->string('action_by');
+            $table->softDeletes();
         });
     }
 

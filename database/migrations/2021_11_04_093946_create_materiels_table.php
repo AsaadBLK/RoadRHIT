@@ -23,6 +23,7 @@ class CreateMaterielsTable extends Migration
             $table->string('etat');
             $table->string('commentaire');
             $table->string('status');
+            $table->softDeletes();
         });
     }
 

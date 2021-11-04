@@ -17,7 +17,14 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>       <!-- bootstrap -->
 
         <!-- Fonts -->
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300&display=swap" rel="stylesheet">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho&display=swap" rel="stylesheet">
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
@@ -30,10 +37,30 @@
 
         <style>
 
-            body {
+    *{
+	/* font-family: 'Oswald', sans-serif; */
+    font-family: 'Zen Old Mincho', serif
+    text-transform: uppercase;
+            }
+
+
+    th,td{
+    font-family: 'Zen Old Mincho', serif
+    text-transform: uppercase;
+    color: #2e4057}
+
+    h1,h2,h3{
+	font-family: 'Oswald', sans-serif;
+    /* font-family: 'Zen Old Mincho', serif */
+    text-transform: uppercase;
+    color: #2e4057}
+
+
+    h2,h3{color: #ffffff}
+
+    body {
 	color: #566787;
 	background: #f5f5f5;
-	font-family: 'Varela Round', sans-serif;
 	font-size: 13px;
 }
 .table-responsive {
@@ -223,7 +250,7 @@ table.table .avatar {
 }
 /* Modal styles */
 .modal .modal-dialog {
-	max-width: 400px;
+	max-width: 800px;
 }
 .modal .modal-header, .modal .modal-body, .modal .modal-footer {
 	padding: 20px 30px;

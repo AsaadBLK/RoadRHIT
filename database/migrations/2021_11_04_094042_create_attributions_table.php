@@ -21,6 +21,7 @@ class CreateAttributionsTable extends Migration
             $table->foreignId('id_accessoire')->nullable();
             $table->string('commentaire');
             $table->string('attribute_at');
+            $table->softDeletes();
         });
     }
 
