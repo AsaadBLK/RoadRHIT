@@ -61,7 +61,7 @@
 	</div>
 	<div class="form-group">
 	<label>Status : {{ $materiel->status }} </option></label> <br>
-	<select name="status" class="select">
+	<select name="status" class="form-control select">
     <option value="---">---</option>
 	<option value="Disponible">Disponible</option>
 	<option value="Déjà attribué">Déjà attribué</option>
@@ -70,7 +70,7 @@
 	</div>
 	<div class="form-group">
 	<label>Etat : {{ $materiel->etat }}</option></label> <br>
-	<select name="etat" class="select">
+	<select name="etat" class="form-control select">
     <option value="---">---</option>
 	<option value="NEUF">NEUF</option>
 	<option value="OPERATIONNEL">OPERATIONNEL</option>

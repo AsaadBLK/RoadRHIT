@@ -50,7 +50,7 @@
 	</div>
 	<div class="form-group">
 	<label>Status</label> <br>
-	<select name="status" class="select">
+	<select name="status" class="form-control select">
     <option value="none">---</option>
 	<option value="Disponible">Disponible</option>
 	<option value="Déjà attribué">Déjà attribué</option>
@@ -59,7 +59,7 @@
 	</div>
 	<div class="form-group">
 	<label>Etat</label> <br>
-	<select name="etat" class="select">
+	<select name="etat" class="form-control select">
     <option value="none">---</option>
 	<option value="NEUF">NEUF</option>
 	<option value="OPERATIONNEL">OPERATIONNEL</option>
@@ -70,8 +70,7 @@
 	<textarea class="form-control" name="commentaire" required></textarea>
 	</div>
 
-	<input type="button" class="btn btn-default" data-dismiss="modal" value="Annuler">
-	<input type="submit" class="btn btn-success" value="Ajouter">
+	<input style="width:150px;" type="submit" class="btn btn-success" value="Ajouter">
 
 	</form>
 

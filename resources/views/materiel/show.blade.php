@@ -7,7 +7,7 @@
 	<div class="row">
 	<div class="col-sm-6">
 	    <br>
-	<h2 class="modal-title">Visualisation d'un materiel</h2>
+	<h2 class="modal-title">Visualiser le materiel</h2>
 	</div>
 	<div class="col-sm-6">
     <br><br>
@@ -61,13 +61,13 @@
 	</div>
 	<div class="form-group">
 	<label>Status</label> <br>
-	<select name="status" class="select">
+	<select name="status" class="form-control select">
     <option value="{{ $materiel->status }}">{{ $materiel->status }}</option>
 	</select>
 	</div>
 	<div class="form-group">
 	<label>Etat</label> <br>
-	<select name="etat" class="select">
+	<select name="etat" class="form-control select">
     <option value="{{ $materiel->etat }}">{{ $materiel->etat }}</option>
 	</select>
 
