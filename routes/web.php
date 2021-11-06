@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MaterielsController;
+use App\Http\Controllers\AccessoiresController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,15 @@ Route::delete('/delete/materiel/{id}', [MaterielsController::class, 'delete'])->
 Route::delete('/destroy/materiel/{id}', [MaterielsController::class, 'destroy'])->name('materiel.destroy');
 Route::get('/restore/materiel/{id}', [MaterielsController::class, 'restore'])->name('materiel.restore');
 /* Materiel */
+
+
+  Route::resource('accessoire', AccessoiresController::class);
+  Route::POST('accessoire.update/{id}', [AccessoiresController::class, 'update'])->name('accessoire.update');
+// Route::get('accessoire.data', [AccessoiresController::class, 'index']);
+// Route::post('add-update-accessoire', [AccessoiresController::class, 'store']);
+// Route::post('edit-accessoire', [AccessoiresController::class, 'edit']);
+// Route::post('delete-accessoire', [AccessoiresController::class, 'destroy']);
+
 
 
 
