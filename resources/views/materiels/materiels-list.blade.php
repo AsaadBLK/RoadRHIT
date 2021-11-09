@@ -43,8 +43,8 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
+                <div class="modal-body">
                     <div class="card">
-                        <div class="modal-body">
                             <div class="card-body">
                             <form action="{{ route('materiels.add.materiel') }}" method="post" id="add-materiel-form" autocomplete="off">
                                 @csrf
