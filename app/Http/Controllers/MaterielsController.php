@@ -5,45 +5,91 @@ namespace App\Http\Controllers;
 use App\Models\Materiel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Yajra\Datatables\Datatables;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class MaterielsController extends Controller
 {
 
+    //if (auth()->user()->current_team_id == 1 || auth()->user()->current_team_id == 4)
 
+
+    //materiels LIST
     public function index()
     {
-        $materiels = Materiel::latest()->paginate(4);
-        return view('materiel.index', [
-            'materiels' => $materiels,
-        ]);
+        return view('materiels.materiels-list');
     }
 
-
-    public function show($id)
+    //ADD NEW Materiel
+    public function addMateriel(Request $request)
     {
-        //$this->authorize('view', Post::class);
-        $materiel = Materiel::where('id', $id)->first();
-        return view('materiel.show', [
-            'materiel' => $materiel,
+        $validator = \Validator::make($request->all(), [
+        'designation'=>'required|min:3|max:50',
+        'marque' => 'required|min:3|max:50',
+        'modell' => 'required|min:3|max:50',
+        'serialnumber' => 'required|min:3|max:50',
+        'status' => 'required|min:3|max:50',
+        'etat' => 'required|min:3|max:50',
+        'commentaire' => 'required|min:3|max:50',
         ]);
-    }
 
-
-    public function create()
-    {
-        if (auth()->user()->current_team_id == 1 || auth()->user()->current_team_id == 4) {
-            return view('materiel.create');
+        if (!$validator->passes()) {
+            return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
         } else {
-            redirect()->back();
+            $materiel = new Materiel();
+            $materiel->designation = $request->designation;
+            $materiel->marque = $request->marque;
+            $materiel->modell = $request->modell;
+            $materiel->serialnumber = $request->serialnumber;
+            $materiel->status = $request->status;
+            $materiel->etat = $request->etat;
+            $materiel->commentaire = $request->commentaire;
+            $query = $materiel->save();
+
+            if (!$query) {
+                return response()->json(['code' => 0, 'msg' => 'Priére de revérifier !']);
+            } else {
+                return response()->json(['code' => 1, 'msg' => 'Le nouveau matériel a été enregistré avec succès']);
+            }
         }
     }
 
-
-    public function store(Request $request)
+    // GET ALL Materiels
+    public function getMaterielsList(Request $request)
     {
+        $materiels = Materiel::all();
+        return DataTables::of($materiels)
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                return '<div class="btn-group">
+        <button class="btn btn-sm btn-primary" data-id="' . $row['id'] . '" id="editMaterielBtn"><span class="material-icons">construction</span></button>
+        <button class="btn btn-sm btn-danger" data-id="' . $row['id'] . '" id="deleteMaterielBtn"><span class="material-icons">delete_sweep</span></button>
+        </div>';
+            })
+            ->addColumn('checkbox', function ($row) {
+                return '<input type="checkbox" name="materiel_checkbox" data-id="' . $row['id'] . '"><label></label>';
+            })
 
-        $this->validate($request,[
-            'designation'=>'required|min:3|max:50',
+            ->rawColumns(['actions', 'checkbox'])
+            ->make(true);
+    }
+
+    //GET Materiel DETAILS
+    public function getmaterielDetails(Request $request)
+    {
+        $materiel_id = $request->materiel_id;
+        $materielDetails = Materiel::find($materiel_id);
+        return response()->json(['details' => $materielDetails]);
+    }
+
+    //UPDATE Materiel DETAILS
+    public function updatematerielDetails(Request $request)
+    {
+        $materiel_id = $request->cid;
+
+        $validator = \Validator::make($request->all(), [
+            'designation' => 'required|min:3|max:50',
             'marque' => 'required|min:3|max:50',
             'modell' => 'required|min:3|max:50',
             'serialnumber' => 'required|min:3|max:50',
@@ -52,53 +98,48 @@ class MaterielsController extends Controller
             'commentaire' => 'required|min:3|max:50',
         ]);
 
+        if (!$validator->passes()) {
+            return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
+        } else {
 
-        Materiel::create([
-            'designation' => $request->designation,
-            'marque' => $request->marque,
-            'modell' => $request->modell,
-            'serialnumber' => $request->serialnumber,
-            'status' => $request->status,
-            'etat' => $request->etat,
-            'commentaire' => $request->commentaire,
+            $materiel = Materiel::find($materiel_id);
+            $materiel->designation = $request->designation;
+            $materiel->marque = $request->marque;
+            $materiel->modell = $request->modell;
+            $materiel->serialnumber = $request->serialnumber;
+            $materiel->status = $request->status;
+            $materiel->etat = $request->etat;
+            $materiel->commentaire = $request->commentaire;
+            $query = $materiel->save();
 
-        ]);
-
-        return redirect()->route('materiel.index')->with(['success' => 'Terminer avec success']);
+            if ($query) {
+                return response()->json(['code' => 1, 'msg' => 'Les détails du matériel ont été mis à jour']);
+            } else {
+                return response()->json(['code' => 0, 'msg' => 'Priére de revérifier !']);
+            }
+        }
     }
 
-
-
-    public function edit($id)
+    // DELETE Materiel RECORD
+    public function deleteMateriel(Request $request)
     {
-        $materiel = Materiel::where('id', $id)->first();
-        return view('materiel.edit', [
-            'materiel' => $materiel,
-        ]);
+        $materiel_id = $request->materiel_id;
+        $query = Materiel::find($materiel_id)->delete();
+
+        if ($query) {
+            return response()->json(['code' => 1, 'msg' => 'Le matériel a été supprimé de la base de données']);
+        } else {
+            return response()->json(['code' => 0, 'msg' => 'Priére de revérifier !']);
+        }
     }
 
 
-    public function update($id, Request $request)
+    public function deleteSelectedMateriels(Request $request)
     {
-        $materiel = Materiel::where('id', $id)->first();
-        $materiel->update([
-            'designation' => $request->designation,
-            'marque' => $request->marque,
-            'modell' => $request->modell,
-            'serialnumber' => $request->serialnumber,
-            'status' => $request->status,
-            'etat' => $request->etat,
-            'commentaire' => $request->commentaire,
-        ]);
-        return redirect()->route('materiel.index')->with(['success' => 'Modifier avec success']);
+        $materiels_ids = $request->materiels_ids;
+        Materiel::whereIn('id', $materiels_ids)->delete();
+        return response()->json(['code' => 1, 'msg' => 'Les matériaux ont été supprimés de la base de données']);
     }
 
-
-    public function delete($id)
-    {
-        $materiel = Materiel::where('id', $id)->first();
-        $materiel->delete();
-        return redirect()->route('materiel.index')->with(['success' => 'Supprimer avec success']);
-    }
 
 }

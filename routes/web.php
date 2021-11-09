@@ -20,21 +20,21 @@ Route::get('/', function () {
 });
 
 
-/* Materiel */
-Route::get('/materiel', [MaterielsController::class, 'index'])->name('materiel.index');
-Route::get('/materiel/{id}', [MaterielsController::class, 'show'])->name('materiel.show');
-Route::get('/create/materiel', [MaterielsController::class, 'create'])->name('materiel.create');
-Route::post('/add/materiel', [MaterielsController::class, 'store'])->name('materiel.store');
-Route::get('/edit/materiel/{id}', [MaterielsController::class, 'edit'])->name('materiel.edit');
-Route::put('/update/materiel/{id}', [MaterielsController::class, 'update'])->name('materiel.update');
-Route::delete('/delete/materiel/{id}', [MaterielsController::class, 'delete'])->name('materiel.delete');
-Route::delete('/destroy/materiel/{id}', [MaterielsController::class, 'destroy'])->name('materiel.destroy');
-Route::get('/restore/materiel/{id}', [MaterielsController::class, 'restore'])->name('materiel.restore');
-/* Materiel */
 
 
-// // Resource Route for accessoires.
-// Route::resource('accessoires', AccessoiresController::class);
+// Resource Route for Materiel.
+Route::get('/materiels-list', [MaterielsController::class, 'index'])->name('materiels.materiels.list');
+Route::post('/add-materiel', [MaterielsController::class, 'addMateriel'])->name('materiels.add.materiel');
+Route::get('/getmaterielsList', [MaterielsController::class, 'getmaterielsList'])->name('materiels.get.materiels.list');
+Route::post('/getMaterielsDetails', [MaterielsController::class, 'getMaterielDetails'])->name('materiels.get.materiel.details');
+Route::post('/updateMaterielsDetails', [MaterielsController::class, 'updateMaterielDetails'])->name('materiels.update.materiel.details');
+Route::post('/deleteMateriel', [MaterielsController::class, 'deleteMateriel'])->name('materiels.delete.materiel');
+Route::post('/deleteSelectedmateriels', [MaterielsController::class, 'deleteSelectedmateriels'])->name('materiels.delete.selected.materiels');
+// Resource Route for Materiel.
+
+
+
+// Resource Route for accessoires.
 Route::get('/accessoires-list', [AccessoiresController::class, 'index'])->name('accessoires.accessoires.list');
 Route::post('/add-accessoire', [AccessoiresController::class, 'addAccessoire'])->name('accessoires.add.accessoire');
 Route::get('/getaccessoiresList', [AccessoiresController::class, 'getaccessoiresList'])->name('accessoires.get.accessoires.list');

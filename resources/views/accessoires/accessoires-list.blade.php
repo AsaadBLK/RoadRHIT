@@ -16,7 +16,7 @@
                                     <th>Désignation</th>
                                     <th>Etat</th>
                                     <th>Commentaire</th>
-                                    <th>Actions <button class="btn btn-sm btn-danger d-none" id="deleteAllBtn">Delete All</button></th>
+                                    <th>Actions <button class="btn btn-sm btn-danger d-none" id="deleteAllBtn">Tout supprimer</button></th>
                                 </thead>
                                 <tbody></tbody>
                             </table>
@@ -25,7 +25,7 @@
               </div>
               <div class="col-md-4">
                     <div class="card">
-                        <div class="card-header">Add new Accessoire</div>
+                        <div class="card-header">Ajouter un nouvel accessoire</div>
                         <div class="card-body">
                             <form action="{{ route('accessoires.add.accessoire') }}" method="post" id="add-accessoire-form" autocomplete="off">
                                 @csrf
@@ -51,7 +51,7 @@
                                     <span class="text-danger error-text access_commentaire_error"></span>
                                 </div>
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-block btn-success">SAVE</button>
+                                    <button type="submit" class="btn btn-block btn-success">ENREGISTRER</button>
                                 </div>
                             </form>
                         </div>
@@ -99,7 +99,7 @@
                         }
                     });
                 });
-                //GET ALL COUNTRIES
+                //GET ALL accessoires
                var table =  $('#accessoires-table').DataTable({
                      processing:true,
                      info:true,
@@ -211,7 +211,7 @@
            });
            function toggledeleteAllBtn(){
                if( $('input[name="accessoire_checkbox"]:checked').length > 0 ){
-                   $('button#deleteAllBtn').text('Delete ('+$('input[name="accessoire_checkbox"]:checked').length+')').removeClass('d-none');
+                   $('button#deleteAllBtn').text('Supprimer ('+$('input[name="accessoire_checkbox"]:checked').length+')').removeClass('d-none');
                }else{
                    $('button#deleteAllBtn').addClass('d-none');
                }
@@ -225,7 +225,7 @@
                if(checkedAccessoires.length > 0){
                    swal.fire({
                        title:'Are you sure?',
-                       html:'You want to delete <b>('+checkedAccessoires.length+')</b> countries',
+                       html:'You want to delete <b>('+checkedAccessoires.length+')</b> materiels',
                        showCancelButton:true,
                        showCloseButton:true,
                        confirmButtonText:'Yes, Delete',

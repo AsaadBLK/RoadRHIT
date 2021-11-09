@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Edit Accessoire</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Editer Accessoire</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -12,7 +12,7 @@
                     @csrf
                      <input type="hidden" name="cid">
                       <div class="form-group">
-                                    <label for="">Accessoire nom</label>
+                                    <label for="">Accessoire désignation</label>
                                     <input type="text" class="form-control" name="access_name" placeholder="Enter Nom">
                                     <span class="text-danger error-text access_name_error"></span>
                                 </div>
@@ -27,7 +27,7 @@
                                     <span class="text-danger error-text access_commentaire_error"></span>
                                 </div>
                      <div class="form-group">
-                         <button type="submit" class="btn btn-block btn-success">Save Changes</button>
+                         <button type="submit" class="btn btn-block btn-success">Sauvegarder</button>
                      </div>
                  </form>
 

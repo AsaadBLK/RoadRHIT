@@ -39,9 +39,9 @@ class AccessoiresController extends Controller
             $query = $accessoire->save();
 
             if (!$query) {
-                return response()->json(['code' => 0, 'msg' => 'Something went wrong']);
+                return response()->json(['code' => 0, 'msg' => 'Priére de revérifier !']);
             } else {
-                return response()->json(['code' => 1, 'msg' => 'New Accessoire has been successfully saved']);
+                return response()->json(['code' => 1, 'msg' => 'Le nouvel accessoire a été enregistré avec succès']);
             }
         }
     }
@@ -54,8 +54,8 @@ class AccessoiresController extends Controller
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
         return '<div class="btn-group">
-        <button class="btn btn-sm btn-primary" data-id="' . $row['id'] . '" id="editAccessoireBtn">Update</button>
-        <button class="btn btn-sm btn-danger" data-id="' . $row['id'] . '" id="deleteAccessoireBtn">Delete</button>
+        <button class="btn btn-sm btn-primary" data-id="' . $row['id'] . '" id="editAccessoireBtn"><span class="material-icons">construction</span></button>
+        <button class="btn btn-sm btn-danger" data-id="' . $row['id'] . '" id="deleteAccessoireBtn"><span class="material-icons">delete_sweep</span></button>
         </div>';
             })
             ->addColumn('checkbox', function ($row) {
@@ -96,9 +96,9 @@ class AccessoiresController extends Controller
             $query = $accessoire->save();
 
             if ($query) {
-                return response()->json(['code' => 1, 'msg' => 'Accessoire Details have Been updated']);
+                return response()->json(['code' => 1, 'msg' => 'Les détails de l accessoire ont été mis à jour']);
             } else {
-                return response()->json(['code' => 0, 'msg' => 'Something went wrong']);
+                return response()->json(['code' => 0, 'msg' => 'Priére de revérifier !']);
             }
         }
     }
@@ -110,9 +110,9 @@ class AccessoiresController extends Controller
         $query = Accessoire::find($accessoire_id)->delete();
 
         if ($query) {
-            return response()->json(['code' => 1, 'msg' => 'Accessoire has been deleted from database']);
+            return response()->json(['code' => 1, 'msg' => 'L accessoire a été supprimé de la base de données']);
         } else {
-            return response()->json(['code' => 0, 'msg' => 'Something went wrong']);
+            return response()->json(['code' => 0, 'msg' => 'Priére de revérifier !']);
         }
     }
 
@@ -121,7 +121,7 @@ class AccessoiresController extends Controller
     {
         $accessoires_ids = $request->accessoires_ids;
         Accessoire::whereIn('id', $accessoires_ids)->delete();
-        return response()->json(['code' => 1, 'msg' => 'Accessoires have been deleted from database']);
+        return response()->json(['code' => 1, 'msg' => 'Les accessoires ont été supprimés de la base de données']);
     }
 
 
