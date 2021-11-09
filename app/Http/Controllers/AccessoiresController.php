@@ -7,83 +7,133 @@ use Illuminate\Http\Request;
 // use DataTables;
 use Yajra\Datatables\Datatables;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 
 
 class AccessoiresController extends Controller
 {
-    /**
-     * Write code on Method
-     *
-     * @return response()
-     */
-    public function index(Request $request)
+
+    //accessoires LIST
+    public function index()
     {
-        if ($request->ajax()) {
-            $data = Accessoire::latest()->get();
-            return Datatables::of($data)
-                ->addIndexColumn()
-                ->addColumn('action', function ($row) {
-                    $btn = '<a href="javascript:void(0)" data-toggle="tooltip" data-id="' . $row->id . '" data-original-title="Edit" class="edit material-icons editAccessoire"><i class="fas fa-pen text-warning"></i></a>';
-                    $btn = $btn . ' <a href="javascript:void(0)" data-toggle="tooltip" data-id="' . $row->id . '" data-original-title="Delete" class="material-icons deleteAccessoire"><i class="far fa-trash-alt text-danger" data-feather="delete"></i></a>';
-                    return $btn;
-                })
-                ->rawColumns(['action'])->make(true);
+        return view('accessoires.accessoires-list');
+    }
+
+    //ADD NEW Accessoire
+    public function addAccessoire(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'access_name' => 'required',
+            'access_etat' => 'required',
+            'access_commentaire' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
+        } else {
+            $accessoire = new Accessoire();
+            $accessoire->access_name = $request->access_name;
+            $accessoire->access_etat = $request->access_etat;
+            $accessoire->access_commentaire = $request->access_commentaire;
+            $query = $accessoire->save();
+
+            if (!$query) {
+                return response()->json(['code' => 0, 'msg' => 'Something went wrong']);
+            } else {
+                return response()->json(['code' => 1, 'msg' => 'New Accessoire has been successfully saved']);
+            }
         }
-        return view('accessoire.data');
     }
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+
+    // GET ALL Accessoires
+    public function getAccessoiresList(Request $request)
     {
-        $input = $request->all();
-        Accessoire::updateOrCreate($input);
+        $accessoires = Accessoire::all();
+        return DataTables::of($accessoires)
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+        return '<div class="btn-group">
+        <button class="btn btn-sm btn-primary" data-id="' . $row['id'] . '" id="editAccessoireBtn">Update</button>
+        <button class="btn btn-sm btn-danger" data-id="' . $row['id'] . '" id="deleteAccessoireBtn">Delete</button>
+        </div>';
+            })
+            ->addColumn('checkbox', function ($row) {
+                return '<input type="checkbox" name="accessoire_checkbox" data-id="' . $row['id'] . '"><label></label>';
+            })
 
-        return response()->json(['success' => 'Accessoire saved successfully.']);
+            ->rawColumns(['actions', 'checkbox'])
+            ->make(true);
     }
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Accessoire  $Accessoire
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+
+    //GET Accessoire DETAILS
+    public function getaccessoireDetails(Request $request)
     {
-        $Accessoire = Accessoire::find($id);
-        return response()->json($Accessoire);
+        $accessoire_id = $request->accessoire_id;
+        $accessoireDetails = Accessoire::find($accessoire_id);
+        return response()->json(['details' => $accessoireDetails]);
     }
 
-    /**
-     * Update a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    //UPDATE Accessoire DETAILS
+    public function updateaccessoireDetails(Request $request)
     {
-        //$accessoire = Accessoire::where('id', $id)->first();
-        $Accessoire = Accessoire::find($id);
-        $input = $request->all();
-        $Accessoire->update($input);
+        $accessoire_id = $request->cid;
 
-        return response()->json(['success' => 'Accessoire updated successfully.']);
+        $validator = \Validator::make($request->all(), [
+            'access_name' => 'required',
+            'access_etat' => 'required',
+            'access_commentaire' => 'required'
+        ]);
+
+        if (!$validator->passes()) {
+            return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
+        } else {
+
+            $accessoire = Accessoire::find($accessoire_id);
+            $accessoire->access_name = $request->access_name;
+            $accessoire->access_etat = $request->access_etat;
+            $accessoire->access_commentaire = $request->access_commentaire;
+            $query = $accessoire->save();
+
+            if ($query) {
+                return response()->json(['code' => 1, 'msg' => 'Accessoire Details have Been updated']);
+            } else {
+                return response()->json(['code' => 0, 'msg' => 'Something went wrong']);
+            }
+        }
     }
 
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Accessoire  $Accessoire
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    // DELETE Accessoire RECORD
+    public function deleteAccessoire(Request $request)
     {
-        Accessoire::find($id)->delete();
+        $accessoire_id = $request->accessoire_id;
+        $query = Accessoire::find($accessoire_id)->delete();
 
-        return response()->json(['success' => 'Accessoire deleted successfully.']);
+        if ($query) {
+            return response()->json(['code' => 1, 'msg' => 'Accessoire has been deleted from database']);
+        } else {
+            return response()->json(['code' => 0, 'msg' => 'Something went wrong']);
+        }
     }
+
+
+    public function deleteSelectedAccessoires(Request $request)
+    {
+        $accessoires_ids = $request->accessoires_ids;
+        Accessoire::whereIn('id', $accessoires_ids)->delete();
+        return response()->json(['code' => 1, 'msg' => 'Accessoires have been deleted from database']);
+    }
+
+
 }
+
+
+
+
+
+
+
+
+
+
+

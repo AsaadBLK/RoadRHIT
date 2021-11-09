@@ -39,7 +39,6 @@
     <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" />
 
 <!-- datatable -->
@@ -296,53 +295,31 @@ table.table .avatar {
 </style>
   <!-- Styles -->
 
-<script>
-$(document).ready(function(){
-	// Activate tooltip
-	$('[data-toggle="tooltip"]').tooltip();
 
-	// Select/Deselect checkboxes
-	var checkbox = $('table tbody input[type="checkbox"]');
-	$("#selectAll").click(function(){
-		if(this.checked){
-			checkbox.each(function(){
-				this.checked = true;
-			});
-		} else{
-			checkbox.each(function(){
-				this.checked = false;
-			});
-		}
-	});
-	checkbox.click(function(){
-		if(!this.checked){
-			$("#selectAll").prop("checked", false);
-		}
-	});
-});
-</script>
-
+    <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('datatable/css/dataTables.bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('datatable/css/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('sweetalert2/sweetalert2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('toastr/toastr.min.css') }}">
 
     </head>
     <body class="font-sans antialiased">
 
 
 <!-- datatable SCRIPT -->
-    <!-- OBLIGATOIRE -->  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
-    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
+    <script src="{{ asset('jquery/jquery-3.6.0.min.js') }}"></script>
+    <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('datatable/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('datatable/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('sweetalert2/sweetalert2.min.js') }}"></script>
+    <script src="{{ asset('toastr/toastr.min.js') }}"></script>
 <!-- datatable SCRIPT-->
-
 
         <x-jet-banner />
 
         <div class="min-h-screen bg-gray-100">
             @livewire('navigation-menu')
-
-
 
              <!-- added by asaad to check if there is any content to display else make profile management ready -->
             @hasSection('header')

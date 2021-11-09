@@ -21,6 +21,8 @@ class Accessoire extends Model
     {
         return $this->belongsTo(Attribution::class);
     }
+
+
 }
 
 

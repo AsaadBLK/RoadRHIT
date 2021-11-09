@@ -33,15 +33,16 @@ Route::get('/restore/materiel/{id}', [MaterielsController::class, 'restore'])->n
 /* Materiel */
 
 
-  Route::resource('accessoire', AccessoiresController::class);
-  Route::POST('accessoire.update/{id}', [AccessoiresController::class, 'update'])->name('accessoire.update');
-// Route::get('accessoire.data', [AccessoiresController::class, 'index']);
-// Route::post('add-update-accessoire', [AccessoiresController::class, 'store']);
-// Route::post('edit-accessoire', [AccessoiresController::class, 'edit']);
-// Route::post('delete-accessoire', [AccessoiresController::class, 'destroy']);
-
-
-
+// // Resource Route for accessoires.
+// Route::resource('accessoires', AccessoiresController::class);
+Route::get('/accessoires-list', [AccessoiresController::class, 'index'])->name('accessoires.accessoires.list');
+Route::post('/add-accessoire', [AccessoiresController::class, 'addAccessoire'])->name('accessoires.add.accessoire');
+Route::get('/getaccessoiresList', [AccessoiresController::class, 'getaccessoiresList'])->name('accessoires.get.accessoires.list');
+Route::post('/getAccessoiresDetails', [AccessoiresController::class, 'getAccessoireDetails'])->name('accessoires.get.accessoire.details');
+Route::post('/updateAccessoiresDetails', [AccessoiresController::class, 'updateAccessoireDetails'])->name('accessoires.update.accessoire.details');
+Route::post('/deleteAccessoire', [AccessoiresController::class, 'deleteAccessoire'])->name('accessoires.delete.accessoire');
+Route::post('/deleteSelectedaccessoires', [AccessoiresController::class, 'deleteSelectedaccessoires'])->name('accessoires.delete.selected.accessoires');
+// Resource Route for accessoires.
 
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
