@@ -23,6 +23,8 @@ class Employe extends Model
         'status_leave',
         'leave_at',
         'action_by',
+        'entityEmp',
+        'businessEmp',
 
     ];
 

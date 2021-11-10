@@ -21,8 +21,14 @@
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('employes.employes.list') }}" :active="request()->routeIs('employes.employes.list')">
+                        {{ __('Employés') }}
+                    </x-jet-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('materiels.materiels.list') }}" :active="request()->routeIs('materiels.materiels.list')">
-                        {{ __('Materiel') }}
+                        {{ __('Matériel') }}
                     </x-jet-nav-link>
                 </div>
 

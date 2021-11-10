@@ -41,10 +41,12 @@ class RouteServiceProvider extends ServiceProvider
             Route::prefix('api')
                 ->middleware('api')
                 ->namespace($this->namespace)
+                ->namespace('App\Http\Controllers')  //Add this for avoiding the error of controller doesnt existe
                 ->group(base_path('routes/api.php'));
 
             Route::middleware('web')
                 ->namespace($this->namespace)
+                ->namespace('App\Http\Controllers') //Add this
                 ->group(base_path('routes/web.php'));
         });
     }

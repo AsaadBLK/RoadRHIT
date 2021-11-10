@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\EmployesController;
 use App\Http\Controllers\MaterielsController;
 use App\Http\Controllers\AccessoiresController;
 
@@ -43,6 +44,23 @@ Route::post('/updateAccessoiresDetails', [AccessoiresController::class, 'updateA
 Route::post('/deleteAccessoire', [AccessoiresController::class, 'deleteAccessoire'])->name('accessoires.delete.accessoire');
 Route::post('/deleteSelectedaccessoires', [AccessoiresController::class, 'deleteSelectedaccessoires'])->name('accessoires.delete.selected.accessoires');
 // Resource Route for accessoires.
+
+
+
+// Resource Route for employes.
+Route::get('/employes-list', [EmployesController::class, 'index'])->name('employes.employes.list');
+Route::post('/add-employe', [EmployesController::class, 'addEmploye'])->name('employes.add.employe');
+Route::get('/getemployesList', [EmployesController::class, 'getemployesList'])->name('employes.get.employes.list');
+Route::post('/getEmployesDetails', [EmployesController::class, 'getEmployeDetails'])->name('employes.get.employe.details');
+Route::post('/updateEmployesDetails', [EmployesController::class, 'updateEmployeDetails'])->name('employes.update.employe.details');
+Route::post('/deleteEmploye', [EmployesController::class, 'deleteEmploye'])->name('employes.delete.employe');
+Route::post('/deleteSelectedemployes', [EmployesController::class, 'deleteSelectedemployes'])->name('employes.delete.selected.employes');
+// Resource Route for employes.
+
+
+
+
+
 
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
