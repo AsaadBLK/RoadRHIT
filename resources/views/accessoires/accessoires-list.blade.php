@@ -128,7 +128,8 @@
                         //  alert(data.details.access_name);
                         $('.editAccessoire').find('input[name="cid"]').val(data.details.id);
                         $('.editAccessoire').find('input[name="access_name"]').val(data.details.access_name);
-                        $('.editAccessoire').find('input[name="access_etat"]').val(data.details.access_etat);
+                        $('.editAccessoire').find('select[name="access_etat"]').val(data.details.access_etat);
+                        $('.editAccessoire').find('textarea[name="access_commentaire"]').val(data.details.access_commentaire);
                         $('.editAccessoire').modal('show');
                     },'json');
                 });

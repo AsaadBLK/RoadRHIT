@@ -29,9 +29,11 @@ class MaterielsController extends Controller
         'marque' => 'required|min:3|max:50',
         'modell' => 'required|min:3|max:50',
         'serialnumber' => 'required|min:3|max:50',
-        'status' => 'required|min:3|max:50',
+        'status' => 'required|min:2|max:50',
         'etat' => 'required|min:3|max:50',
         'commentaire' => 'required|min:3|max:50',
+        'entity' => 'required|min:3|max:10',
+        'business' => 'required|min:2|max:10',
         ]);
 
         if (!$validator->passes()) {
@@ -45,6 +47,8 @@ class MaterielsController extends Controller
             $materiel->status = $request->status;
             $materiel->etat = $request->etat;
             $materiel->commentaire = $request->commentaire;
+            $materiel->entity = $request->entity;
+            $materiel->business = $request->business;
             $query = $materiel->save();
 
             if (!$query) {
@@ -93,9 +97,11 @@ class MaterielsController extends Controller
             'marque' => 'required|min:3|max:50',
             'modell' => 'required|min:3|max:50',
             'serialnumber' => 'required|min:3|max:50',
-            'status' => 'required|min:3|max:50',
+            'status' => 'required|min:2|max:50',
             'etat' => 'required|min:3|max:50',
             'commentaire' => 'required|min:3|max:50',
+            'entity' => 'required|min:3|max:10',
+            'business' => 'required|min:2|max:10',
         ]);
 
         if (!$validator->passes()) {
@@ -110,6 +116,8 @@ class MaterielsController extends Controller
             $materiel->status = $request->status;
             $materiel->etat = $request->etat;
             $materiel->commentaire = $request->commentaire;
+            $materiel->entity = $request->entity;
+            $materiel->business = $request->business;
             $query = $materiel->save();
 
             if ($query) {

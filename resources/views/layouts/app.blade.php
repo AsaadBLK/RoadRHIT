@@ -333,8 +333,9 @@ table.table .avatar {
 
             <!-- Page Content -->
             @hasSection('content')
+
  <div class="py-12 bg-white">
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+    <div class="mx-auto sm:px-6 lg:px-8">
         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-4 py-4">
             @yield('content')
  </div>

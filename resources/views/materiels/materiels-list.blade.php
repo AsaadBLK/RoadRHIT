@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+
+<div class="py-12">
           <div class="row" style="margin-top: 45px">
 
 
@@ -17,14 +18,16 @@
 
                             <table class="table table-hover table-condensed" id="materiels-table">
                                 <thead>
-                                    <th><input type="checkbox" name="main_checkbox"><label></label></th>
-                                    <th>#</th>
-                                    <th>Désignation</th>
+                                    <th style="width:20px;"><input type="checkbox" name="main_checkbox"><label></label></th>
+                                    <th style="width:20px;">#</th>
+                                    <th >Désignation</th>
                                     <th>Marque</th>
                                     <th>Model</th>
                                     <th>S/N</th>
                                     <th>Status</th>
                                     <th>Etat</th>
+                                    <th>Entity</th>
+                                    <th>Business</th>
                                     <th>Commentaire</th>
                                     <th>Actions <button class="btn btn-sm btn-danger d-none" id="deleteAllBtn">Tout supprimer</button></th>
                                 </thead>
@@ -87,9 +90,33 @@
                                 </select>
                                 <span class="text-danger error-text etat_error"></span>
                                 </div>
+
+                                <div class="form-group">
+                                <label>Entité</label> <br>
+                                <select name="entity" class="form-control select">
+                                <option value="none">---</option>
+                                <option value="SGM">SGM</option>
+                                <option value="ASG">ASG</option>
+                                <option value="TMD">TMD</option>
+                                <option value="LAA">LAA</option>
+                                </select>
+                                <span class="text-danger error-text entity_error"></span>
+                                </div>
+
+                                <div class="form-group">
+                                <label>Business</label> <br>
+                                <select name="business" class="form-control select">
+                                <option value="none">---</option>
+                                <option value="N&R">N&R</option>
+                                <option value="I&E">I&E</option>
+                                <option value="OH">OH</option>
+                                </select>
+                                <span class="text-danger error-text business_error"></span>
+                                </div>
                                 <div class="form-group">
                                 <label>Commentaire</label>
                                 <textarea class="form-control" name="commentaire" required></textarea>
+                                <span class="text-danger error-text commentaire_error"></span>
                                 </div>
 
                                 <div class="form-group">
@@ -159,6 +186,8 @@
                          {data:'serialnumber', name:'serialnumber'},
                          {data:'status', name:'status'},
                          {data:'etat', name:'etat'},
+                         {data:'entity', name:'entity'},
+                         {data:'business', name:'business'},
                          {data:'commentaire', name:'commentaire'},
                          {data:'actions', name:'actions', orderable:false, searchable:false},
                      ]
@@ -178,9 +207,11 @@
                         $('.editMateriel').find('input[name="marque"]').val(data.details.marque);
                         $('.editMateriel').find('input[name="modell"]').val(data.details.modell);
                         $('.editMateriel').find('input[name="serialnumber"]').val(data.details.serialnumber);
-                        $('.editMateriel').find('input[name="status"]').val(data.details.status);
-                        $('.editMateriel').find('input[name="etat"]').val(data.details.etat);
-                        $('.editMateriel').find('input[name="commentaire"]').val(data.details.commentaire);
+                        $('.editMateriel').find('select[name="status"]').val(data.details.status);
+                        $('.editMateriel').find('select[name="etat"]').val(data.details.etat);
+                        $('.editMateriel').find('select[name="entity"]').val(data.details.entity);
+                        $('.editMateriel').find('select[name="business"]').val(data.details.business);
+                        $('.editMateriel').find('textarea[name="commentaire"]').val(data.details.commentaire);
                         $('.editMateriel').modal('show');
                     },'json');
                 });

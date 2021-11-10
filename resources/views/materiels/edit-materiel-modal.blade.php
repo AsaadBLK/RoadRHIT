@@ -50,10 +50,37 @@
                                 </select>
                                 <span class="text-danger error-text etat_error"></span>
                                 </div>
+
+
+                                <div class="form-group">
+                                <label>Entité</label> <br>
+                                <select name="entity" class="form-control select">
+                                <option value="none">---</option>
+                                <option value="SGM">SGM</option>
+                                <option value="ASG">ASG</option>
+                                <option value="TMD">TMD</option>
+                                <option value="LAA">LAA</option>
+                                </select>
+                                <span class="text-danger error-text entity_error"></span>
+                                </div>
+
+                                <div class="form-group">
+                                <label>Business</label> <br>
+                                <select name="business" class="form-control select">
+                                <option value="none">---</option>
+                                <option value="N&R">N&R</option>
+                                <option value="I&E">I&E</option>
+                                <option value="OH">OH</option>
+                                </select>
+                                <span class="text-danger error-text business_error"></span>
+                                </div>
                                 <div class="form-group">
                                 <label>Commentaire</label>
                                 <textarea class="form-control" name="commentaire" required></textarea>
+                                <span class="text-danger error-text commentaire_error"></span>
                                 </div>
+
+
                      <div class="form-group">
                          <button type="submit" class="btn btn-block btn-success">Sauvegarder</button>
                      </div>

@@ -16,10 +16,14 @@
                                     <input type="text" class="form-control" name="access_name" placeholder="Enter Nom">
                                     <span class="text-danger error-text access_name_error"></span>
                                 </div>
-                                <div class="form-group">
-                                    <label for="">Etat</label>
-                                    <input type="text" class="form-control" name="access_etat" placeholder="Enter Etat">
-                                    <span class="text-danger error-text access_etat_error"></span>
+                               <div class="form-group">
+                                <label>Etat</label> <br>
+                                <select name="access_etat" class="form-control select">
+                                <option value="none">---</option>
+                                <option value="NEUF">NEUF</option>
+                                <option value="OPERATIONNEL">OPERATIONNEL</option>
+                                </select>
+                                 <span class="text-danger error-text access_etat_error"></span>
                                 </div>
                                 <div class="form-group">
                                     <label for="">Commentaire</label>

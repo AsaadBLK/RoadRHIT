@@ -18,6 +18,8 @@ class Materiel extends Model
         'etat',
         'commentaire',
         'status',
+        'entity',
+        'business',
 
     ];
 
