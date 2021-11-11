@@ -249,6 +249,15 @@
                                  <span class="text-danger error-text status_reqtoIT_error"></span>
                                 </div>
 
+
+                                <div class="form-group">
+                                 <label>Email</label>
+                                <input type="email" name="email" class="form-control" required>
+                                <span class="text-danger error-text email_error"></span>
+                                </div>
+
+
+
                                 <div class="form-group">
                                 <label>Entité</label> <br>
                                 <select name="entityEmp" class="form-control select">
@@ -362,15 +371,15 @@
                         //  alert(data.details.access_name);
                         $('.editEmploye').find('input[name="cid"]').val(data.details.id);
                         $('.editEmploye').find('input[name="nomprenom"]').val(data.details.nomprenom);
-                        // $('.editEmploye').find('input[name="email"]').val(data.details.email);
+                        $('.editEmploye').find('input[name="email"]').val(data.details.email);
                         $('.editEmploye').find('input[name="matricule"]').val(data.details.matricule);
                         $('.editEmploye').find('input[name="respH"]').val(data.details.respH);
                         $('.editEmploye').find('select[name="ville"]').val(data.details.ville);
                         $('.editEmploye').find('select[name="entityEmp"]').val(data.details.entityEmp);
                         $('.editEmploye').find('select[name="businessEmp"]').val(data.details.businessEmp);
                         $('.editEmploye').find('select[name="status_reqtoIT"]').val(data.details.status_reqtoIT);
-                        // $('.editEmploye').find('select[name="status_crebyIT"]').val(data.details.status_crebyIT);
-                        // $('.editEmploye').find('select[name="action_by"]').val(data.details.action_by);
+                        $('.editEmploye').find('select[name="status_crebyIT"]').val(data.details.status_crebyIT);
+                        $('.editEmploye').find('select[name="action_by"]').val(data.details.action_by);
                         $('.editEmploye').modal('show');
                     },'json');
                 });

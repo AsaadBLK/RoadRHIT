@@ -11,7 +11,7 @@
                  <form action="<?= route('employes.update.employe.details') ?>" method="post" id="update-employe-form">
                     @csrf
                      <input type="hidden" name="cid">
- <div class="form-group">
+                                <div class="form-group">
                                 <label>Nom Prénom</label>
                                 <input type="text" name="nomprenom" class="form-control" required>
                                 <span class="text-danger error-text nomprenom_error"></span>
@@ -26,7 +26,7 @@
                                 <input type="text" name="respH" class="form-control" required>
                                 <span class="text-danger error-text respH_error"></span>
                                 </div>
-                                <div class="form-group">
+ <div class="form-group">
                                 <label>Ville</label>
                                 <select class="form-control select" id="ville" name="ville">
                                 <option value="---">---</option>
@@ -209,32 +209,40 @@
                                 </div>
 
 
+                                <div class="form-group">
+                                 <label>Email</label>
+                                <input type="email" name="email" class="form-control" required>
+                                <span class="text-danger error-text email_error"></span>
+                                </div>
+
+
 
                                 <div class="form-group">
-                                <label>Creation d'adresse email (IT)</label> <br>
-                                <select name="status_crebyIT" class="form-control select">
+                                <label>Entité</label> <br>
+                                <select name="entityEmp" class="form-control select">
                                 <option value="none">---</option>
-                                <option value="Créée">Créée</option>
-                                <option value="Non créée">Non créée</option>
+                                <option value="SGM">SGM</option>
+                                <option value="ASG">ASG</option>
+                                <option value="TMD">TMD</option>
+                                <option value="LAA">LAA</option>
                                 </select>
-                                 <span class="text-danger error-text status_crebyIT_error"></span>
+                                <span class="text-danger error-text entityEmp_error"></span>
                                 </div>
 
                                 <div class="form-group">
                                 <label>Business</label> <br>
-                                <select name="business" class="form-control select">
+                                <select name="businessEmp" class="form-control select">
                                 <option value="none">---</option>
                                 <option value="N&R">N&R</option>
                                 <option value="I&E">I&E</option>
                                 <option value="OH">OH</option>
                                 </select>
-                                <span class="text-danger error-text business_error"></span>
+                                <span class="text-danger error-text businessEmp_error"></span>
                                 </div>
 
-                                <div class="form-group">
-                                <button type="submit" class="btn btn-xs-block btn-success">ENREGISTRER</button>
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                               </div>
+                        <div class="form-group">
+                         <button type="submit" class="btn btn-xs-block btn-success">Sauvegarder</button>
+                     </div>
 
                  </form>
 

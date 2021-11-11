@@ -306,6 +306,11 @@ table.table .avatar {
     <body class="font-sans antialiased">
 
 
+<!-- dev tool SCRIPT -->
+         {{-- <script type="application/javascript" src="https://github.com/mozilla/webextension-polyfill"></script> --}}
+<!-- dev tool SCRIPT -->
+
+
 <!-- datatable SCRIPT -->
     <script src="{{ asset('jquery/jquery-3.6.0.min.js') }}"></script>
     <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>

@@ -40,8 +40,9 @@ class EmployesController extends Controller
             $employe->entityEmp = $request->entityEmp;
             $employe->businessEmp = $request->businessEmp;
             $employe->status_reqtoIT = $request->status_reqtoIT;
-            //$employe->status_crebyIT = $request->status_crebyIT;
-            //$employe->email = $request->email;
+            $employe->status_crebyIT = $request->status_crebyIT;
+            $employe->email = $request->email;
+            $employe->status_leave = "Active";
             $employe->action_by = Auth::user()->name;
             $query = $employe->save();
 
@@ -93,8 +94,8 @@ class EmployesController extends Controller
             'respH' => 'required|min:3|max:50',
             'ville' => 'required|min:2|max:50',
             'status_reqtoIT' => 'required|min:3|max:50',
-            'status_crebyIT' => 'required|min:3|max:50',
-            'action_by' => 'required|min:3|max:50',
+            //'status_crebyIT' => 'required|min:3|max:50',
+            //'action_by' => 'required|min:3|max:50',
         ]);
 
         if (!$validator->passes()) {
@@ -109,7 +110,7 @@ class EmployesController extends Controller
             $employe->ville = $request->ville;
             $employe->status_reqtoIT = $request->status_reqtoIT;
             $employe->status_crebyIT = $request->status_crebyIT;
-            $employe->action_by = $request->action_by;
+            $employe->action_by = Auth::user()->name;
             $query = $employe_id->save();
 
             if ($query) {

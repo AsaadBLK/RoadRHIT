@@ -21,13 +21,13 @@ class CreateEmployesTable extends Migration
             $table->timestamp('email_request_at')->nullable();
             $table->timestamp('email_create_at')->nullable();
             $table->string('matricule');
-            $table->string('business');
+            //$table->string('business')->nullable();
             $table->string('respH');
             $table->string('ville');
-            $table->string('status_reqtoIT');
-            $table->string('status_crebyIT');
-            $table->string('status_leave');
-            $table->string('leave_at');
+            $table->string('status_reqtoIT')->nullable();
+            $table->string('status_crebyIT')->nullable();
+            $table->string('status_leave')->nullable();
+            $table->string('leave_at')->nullable();
             $table->string('action_by');
             $table->softDeletes();
         });
