@@ -89,11 +89,10 @@ class EmployesController extends Controller
 
         $validator = \Validator::make($request->all(), [
             'nomprenom' => 'required|min:3|max:50',
-            'email' => 'required|min:3|max:50',
             'matricule' => 'required|min:3|max:50',
             'respH' => 'required|min:3|max:50',
             'ville' => 'required|min:2|max:50',
-            'status_reqtoIT' => 'required|min:3|max:50',
+            //'status_reqtoIT' => 'required|min:3|max:50',
             //'status_crebyIT' => 'required|min:3|max:50',
             //'action_by' => 'required|min:3|max:50',
         ]);
@@ -101,17 +100,19 @@ class EmployesController extends Controller
         if (!$validator->passes()) {
             return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
         } else {
-
             $employe = Employe::find($employe_id);
             $employe->nomprenom = $request->nomprenom;
-            $employe->email = $request->email;
             $employe->matricule = $request->matricule;
             $employe->respH = $request->respH;
             $employe->ville = $request->ville;
+            $employe->entityEmp = $request->entityEmp;
+            $employe->businessEmp = $request->businessEmp;
             $employe->status_reqtoIT = $request->status_reqtoIT;
             $employe->status_crebyIT = $request->status_crebyIT;
+            $employe->email = $request->email;
+            $employe->status_leave = "Active";
             $employe->action_by = Auth::user()->name;
-            $query = $employe_id->save();
+            $query = $employe->save();
 
             if ($query) {
                 return response()->json(['code' => 1, 'msg' => 'Les détails ont été mis à jour']);
