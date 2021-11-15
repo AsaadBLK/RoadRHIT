@@ -8,12 +8,13 @@
                 </button>
             </div>
             <div class="modal-body">
+
                  <form action="<?= route('employes.update.employe.details') ?>" method="post" id="update-employe-form">
                     @csrf
                      <input type="hidden" name="cid">
                                 <div class="form-group">
                                 <label>Nom Prénom</label>
-                                <input type="text" name="nomprenom" class="form-control" required>
+                                <input type="text" name="nomprenom" class="form-control" readonly>
                                 <span class="text-danger error-text nomprenom_error"></span>
                                 </div>
                                 <div class="form-group">
@@ -198,24 +199,27 @@
                                 <span class="text-danger error-text ville_error"></span>
  </div>
 
-                                <div class="form-group">
-                                <label>Demande Creation d'adresse email (RH)</label> <br>
-                                <select name="status_reqtoIT" class="form-control select">
+                              
+
+                                @if(auth()->user()->current_team_id == 1 || auth()->user()->current_team_id == 2)
+                                {{-- <div class="form-group">
+                                <label>Création d'adresse email (IT)</label> <br>
+                                <select name="status_crebyIT" class="form-control select">
                                 <option value="none">---</option>
-                                <option value="Envoyé">Envoyé</option>
-                                <option value="Non envoyé">Non envoyé</option>
+                                <option value="Créée">Créée</option>
+                                <option value="Non Créée">Non Créée</option>
                                 </select>
-                                 <span class="text-danger error-text status_reqtoIT_error"></span>
-                                </div>
-
-
+                                 <span class="text-danger error-text status_crebyIT_error"></span>
+                                </div> --}} 
                                 <div class="form-group">
-                                 <label>Email</label>
+                                <label>Email</label>
                                 <input type="email" name="email" class="form-control" required>
                                 <span class="text-danger error-text email_error"></span>
                                 </div>
 
 
+                                @endif
+ 
 
                                 <div class="form-group">
                                 <label>Entité</label> <br>

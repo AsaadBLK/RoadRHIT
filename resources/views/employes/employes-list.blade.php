@@ -52,6 +52,7 @@
                             <div class="card-body">
                             <form action="{{ route('employes.add.employe') }}" method="post" id="add-employe-form" autocomplete="off">
                                 @csrf
+ 
                                 <div class="form-group">
                                 <label>Nom Prénom</label>
                                 <input type="text" name="nomprenom" class="form-control" required>
@@ -239,23 +240,8 @@
                                 <span class="text-danger error-text ville_error"></span>
  </div>
 
-                                <div class="form-group">
-                                <label>Demande Creation d'adresse email (RH)</label> <br>
-                                <select name="status_reqtoIT" class="form-control select">
-                                <option value="none">---</option>
-                                <option value="Envoyé">Envoyé</option>
-                                <option value="Non envoyé">Non envoyé</option>
-                                </select>
-                                 <span class="text-danger error-text status_reqtoIT_error"></span>
-                                </div>
 
-
-                                <div class="form-group">
-                                 <label>Email</label>
-                                <input type="email" name="email" class="form-control" required>
-                                <span class="text-danger error-text email_error"></span>
-                                </div>
-
+                            
 
 
                                 <div class="form-group">
@@ -294,6 +280,7 @@
     </div></div>
 
      @include('employes.edit-employe-modal')
+     @include('employes.employe-email')
 
     <script>
          toastr.options.preventDuplicates = true;
@@ -384,7 +371,8 @@
                     },'json');
                 });
 
-                //UPDATE employe DETAILS
+
+//UPDATE employe DETAILS
                 $('#update-employe-form').on('submit', function(e){
                     e.preventDefault();
                     var form = this;
@@ -402,7 +390,7 @@
                               if(data.code == 0){
                                   $.each(data.error, function(prefix, val){
                                       $(form).find('span.'+prefix+'_error').text(val[0]);
-                                  });
+                                  });  /* added  to show error */ toastr.error(data.msg);
                               }else{
                                   $('#employes-table').DataTable().ajax.reload(null, false);
                                   $('.editEmploye').modal('hide');
@@ -412,6 +400,52 @@
                         }
                     });
                 });
+
+
+
+
+                //demande adresse email
+                $(document).on('click','#editEmployeEmailBtn', function(){
+                    var employe_id = $(this).data('id');
+                    $('.editEmployeEmail').find('form')[0].reset();
+                    $('.editEmployeEmail').find('span.error-text').text('');
+                    $.post('<?= route("employes.get.employe.details") ?>',{employe_id:employe_id}, function(data){
+                        $('.editEmployeEmail').find('input[name="cid"]').val(data.details.id);
+                        $('.editEmployeEmail').find('select[name="status_reqtoIT"]').val(data.details.status_reqtoIT);
+                        $('.editEmployeEmail').modal('show');
+                    },'json');
+                });
+                $('#email-employe-form').on('submit', function(e){
+                    e.preventDefault();
+                    var form = this;
+                    $.ajax({
+                        url:$(form).attr('action'),
+                        method:$(form).attr('method'),
+                        data:new FormData(form),
+                        processData:false,
+                        dataType:'json',
+                        contentType:false,
+                        beforeSend: function(){
+                             $(form).find('span.error-text').text('');
+                        },
+                        success: function(data){
+                              if(data.code == 0){
+                                  $.each(data.error, function(prefix, val){
+                                      $(form).find('span.'+prefix+'_error').text(val[0]);
+                                      
+                                  });   /* added  to show error */ toastr.error(data.msg);
+                              }else{
+                                  $('#employes-table').DataTable().ajax.reload(null, false);
+                                  $('.editEmployeEmail').modal('hide');
+                                  $('.editEmployeEmail').find('form')[0].reset();
+                                  toastr.success(data.msg);
+                              }
+                        }
+                    });
+                });
+
+
+                
                 //DELETE employe RECORD
                 $(document).on('click','#deleteEmployeBtn', function(){
                     var employe_id = $(this).data('id');

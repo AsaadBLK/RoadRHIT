@@ -55,6 +55,10 @@ Route::post('/getEmployesDetails', [EmployesController::class, 'getEmployeDetail
 Route::post('/updateEmployesDetails', [EmployesController::class, 'updateEmployeDetails'])->name('employes.update.employe.details');
 Route::post('/deleteEmploye', [EmployesController::class, 'deleteEmploye'])->name('employes.delete.employe');
 Route::post('/deleteSelectedemployes', [EmployesController::class, 'deleteSelectedemployes'])->name('employes.delete.selected.employes');
+
+
+ 
+Route::post('/updateemployeEmails', [EmployesController::class, 'updateemployeEmails'])->name('updateEmployeEmails'); 
 // Resource Route for employes.
 
 

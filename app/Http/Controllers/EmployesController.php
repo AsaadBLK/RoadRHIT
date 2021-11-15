@@ -39,9 +39,9 @@ class EmployesController extends Controller
             $employe->ville = $request->ville;
             $employe->entityEmp = $request->entityEmp;
             $employe->businessEmp = $request->businessEmp;
-            $employe->status_reqtoIT = $request->status_reqtoIT;
-            $employe->status_crebyIT = $request->status_crebyIT;
-            $employe->email = $request->email;
+            $employe->status_reqtoIT = "Non envoyé";
+            $employe->status_crebyIT = "Non Créée";
+            $employe->email = "----";
             $employe->status_leave = "Active";
             $employe->action_by = Auth::user()->name;
             $query = $employe->save();
@@ -64,7 +64,8 @@ class EmployesController extends Controller
         return '<div class="btn-group">
         <button class="btn btn-sm btn-primary" data-id="' . $row['id'] . '" id="editEmployeBtn"><span class="material-icons">construction</span></button>
         <button class="btn btn-sm btn-danger" data-id="' . $row['id'] . '" id="deleteEmployeBtn"><span class="material-icons">delete_sweep</span></button>
-        </div>';
+       <button class="btn btn-sm btn-secondary" data-id="' . $row['id'] . '" id="editEmployeEmailBtn"><span class="material-icons">email</span></button>
+         </div>';
             })
             ->addColumn('checkbox', function ($row) {
                 return '<input type="checkbox" name="employe_checkbox" data-id="' . $row['id'] . '"><label></label>';
@@ -82,6 +83,42 @@ class EmployesController extends Controller
         return response()->json(['details' => $employeDetails]);
     }
 
+
+
+
+
+    //sendEmailRH employe 
+    public function updateemployeEmails(Request $request)
+    {
+            $employe_id = $request->cid;
+            $employe = Employe::find($employe_id);
+
+        if (Str::of($request->status_reqtoIT)->exactly('Envoyé') && (Str::of($employe->status_reqtoIT)->exactly('Non envoyé') )) {
+
+            $employe->status_reqtoIT = $request->status_reqtoIT;
+            $employe->email_request_at = date('Y-m-d H:i:s'); 
+            $employe->action_by = Auth::user()->name;
+            $query = $employe->save();
+
+            if ($query) {
+                return response()->json(['code' => 1, 'msg' => 'La demande a été envoyé.']);
+            } else {
+                return response()->json(['code' => 0, 'msg' => 'Priére de revérifier !']);
+            }
+        } else if(Str::of($request->status_reqtoIT)->exactly('Non envoyé')) {
+            return response()->json(['code' => 0, 'msg' => 'Priére de revérifier le statut !']);
+        } else {
+            return response()->json(['code' => 0, 'msg' => 'La demande a été déja envoyé !']);
+        }
+ 
+        
+       
+         
+    }
+
+
+
+
     //UPDATE employe DETAILS
     public function updateemployeDetails(Request $request)
     {
@@ -91,36 +128,38 @@ class EmployesController extends Controller
             'nomprenom' => 'required|min:3|max:50',
             'matricule' => 'required|min:3|max:50',
             'respH' => 'required|min:3|max:50',
-            'ville' => 'required|min:2|max:50',
-            //'status_reqtoIT' => 'required|min:3|max:50',
-            //'status_crebyIT' => 'required|min:3|max:50',
-            //'action_by' => 'required|min:3|max:50',
+            'ville' => 'required|min:2|max:50', 
         ]);
 
         if (!$validator->passes()) {
             return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
         } else {
+
             $employe = Employe::find($employe_id);
+            if (Str::of($request->email)->contains('@sgs.com')) {
             $employe->nomprenom = $request->nomprenom;
             $employe->matricule = $request->matricule;
             $employe->respH = $request->respH;
             $employe->ville = $request->ville;
             $employe->entityEmp = $request->entityEmp;
             $employe->businessEmp = $request->businessEmp;
-            $employe->status_reqtoIT = $request->status_reqtoIT;
-            $employe->status_crebyIT = $request->status_crebyIT;
+            $employe->status_crebyIT = "Créée";
+            $employe->email_create_at = date('Y-m-d H:i:s'); 
             $employe->email = $request->email;
             $employe->status_leave = "Active";
-            $employe->action_by = Auth::user()->name;
+            //$employe->action_by = Auth::user()->name;
             $query = $employe->save();
-
             if ($query) {
                 return response()->json(['code' => 1, 'msg' => 'Les détails ont été mis à jour']);
             } else {
                 return response()->json(['code' => 0, 'msg' => 'Priére de revérifier !']);
             }
-        }
-    }
+        } // end if str 
+        else {
+                return response()->json(['code' => 0, 'msg' => 'Priére de revérifier votre email !']);
+            } // end else str
+    } // end else validator
+}
 
     // DELETE employe RECORD
     public function deleteEmploye(Request $request)
