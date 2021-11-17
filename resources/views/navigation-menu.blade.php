@@ -39,7 +39,11 @@
                 </div>
 
 
-
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('attributions.attributions.list') }}" :active="request()->routeIs('attributions.attributions.list')">
+                        {{ __('Attribution') }}
+                    </x-jet-nav-link>
+                </div>
 
 
 

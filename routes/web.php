@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmployesController;
 use App\Http\Controllers\MaterielsController;
 use App\Http\Controllers\AccessoiresController;
+use App\Http\Controllers\AttributionsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,11 +57,20 @@ Route::post('/updateEmployesDetails', [EmployesController::class, 'updateEmploye
 Route::post('/deleteEmploye', [EmployesController::class, 'deleteEmploye'])->name('employes.delete.employe');
 Route::post('/deleteSelectedemployes', [EmployesController::class, 'deleteSelectedemployes'])->name('employes.delete.selected.employes');
 
-
- 
-Route::post('/updateemployeEmails', [EmployesController::class, 'updateemployeEmails'])->name('updateEmployeEmails'); 
+Route::post('/updateemployeEmails', [EmployesController::class, 'updateemployeEmails'])->name('updateEmployeEmails');
 // Resource Route for employes.
 
+
+
+// Resource Route for attributions.
+Route::get('/attributions-list', [AttributionsController::class, 'index'])->name('attributions.attributions.list');
+Route::post('/add-attribution', [AttributionsController::class, 'addAttribution'])->name('attributions.add.attribution');
+Route::get('/getattributionsList', [AttributionsController::class, 'getattributionsList'])->name('attributions.get.attributions.list');
+Route::post('/getAttributionsDetails', [AttributionsController::class, 'getAttributionDetails'])->name('attributions.get.attribution.details');
+Route::post('/updateAttributionsDetails', [AttributionsController::class, 'updateAttributionDetails'])->name('attributions.update.attribution.details');
+Route::post('/deleteAttribution', [AttributionsController::class, 'deleteAttribution'])->name('attributions.delete.attribution');
+Route::post('/deleteSelectedattributions', [AttributionsController::class, 'deleteSelectedAttributions'])->name('attributions.delete.selected.attributions');
+// Resource Route for attributions.
 
 
 
