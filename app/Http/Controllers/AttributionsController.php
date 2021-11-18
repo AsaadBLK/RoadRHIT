@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Attribution;
+use App\Models\Employe;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Yajra\Datatables\Datatables;
@@ -15,7 +16,13 @@ class AttributionsController extends Controller
     //attributions LIST
     public function index()
     {
-        return view('attributions.attributions-list');
+
+        //$empls = Employe::where('deleted_at', null)->orderBy('nomprenom')->lists('nomprenom', 'id');
+        
+    $empls = Employe::all();
+    $selectedempl= Employe::first()->emp_id;
+    
+    return view('attributions.attributions-list', compact('empls', 'selectedempl')); 
     }
 
     //ADD NEW employe
@@ -50,8 +57,22 @@ class AttributionsController extends Controller
     // GET ALL employes
     public function getAttributionsList(Request $request)
     {
-        $attributions = Attribution::all();
-        return DataTables::of($attributions)
+        $attributions = DB::select(DB::raw("
+            SELECT att.id , nomprenom , designation, access_name, attribute_at, att.commentaire
+            FROM attributions AS att
+            INNER JOIN
+            employes AS emp
+            ON att.id_employe = emp.id
+            INNER JOIN
+            accessoires AS acc
+            ON att.id_accessoire = acc.id
+            INNER JOIN
+            materiels mater
+            ON att.id_materiel=mater.id"));
+
+        //Attribution::all();
+        //return DataTables::of($attributions)
+        return DataTables::of(json_decode(json_encode($attributions), true))
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
                 return '<div class="btn-group">
@@ -65,6 +86,7 @@ class AttributionsController extends Controller
             })
 
             ->rawColumns(['actions', 'checkbox'])
+            //->rawColumns(['id'])
             ->make(true);
     }
 
@@ -72,7 +94,7 @@ class AttributionsController extends Controller
     public function getattributionDetails(Request $request)
     {
         $attribution_id = $request->employe_id;
-        $attributionDetails = Attribution::find($attribution_id);
+        $attributionDetails = Attribution::find($attribution_id); 
         return response()->json(['details' => $attributionDetails]);
     }
 
