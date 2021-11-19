@@ -3,32 +3,32 @@
 @section('content')
     <div class="py-12">
         <div class="row" style="margin-top: 45px">
-            <div class="col-md-12"> 
+            <div class="col-md-12">
 
                 {{-- <input type="text" name="searchfor" id="" class="form-control"> --}}
                     <div class="card">
                         <div class="card-header">Attributions
                            <button type="button" class="btn btn-xs float-sm-right" data-toggle="modal" data-target="#exampleModal"><span class="material-icons">add_circle</span></button>
-                        </div> 
+                        </div>
                         <div class="card-body">
                             <table class="table table-hover table-condensed" id="attributions-table">
                                 <thead>
                                     <th><input type="checkbox" name="main_checkbox"><label></label></th>
                                     <th>#</th>
-                                    
+
                                     <th>Nom Prénom</th>
                                     <th>Matériel</th>
                                     <th>Accessoire</th>
                                     <th>Attribuer à</th>
                                     <th>Commentaire</th>
-                                    
+
                                     <th>Actions <button class="btn btn-sm btn-danger d-none" id="deleteAllBtn">Tout supprimer</button></th>
                                 </thead>
                                 <tbody></tbody>
                             </table>
                         </div>
                     </div>
-              </div> 
+              </div>
         </div>
 
 
@@ -52,10 +52,10 @@
                                 @csrf
                            <div class="form-group">
                                 <label>Employé</label> <br>
-                                <select class="form-control" name="id_employe">
+                                <select class="form-control select" name="id_employe">
                                 @if ($empls->count())
                                 @foreach($empls as $empl)
-                                <option value="{{ $empl->id }}" {{ $selectedempl== $empl->id ? 'selected="selected"' : '' }}>{{ $empl->nomprenom }}</option>    
+                                <option value="{{ $empl->id }}" {{ $selectedempl== $empl->id ? 'selected="selected"' : '' }}>{{ $empl->nomprenom }}</option>
                                 @endforeach
                                 @endif
                                 </select>
@@ -64,21 +64,24 @@
 
                                 <div class="form-group">
                                 <label>Matériel</label> <br>
-                                <select name="id_materiel" class="form-control select">
-                                <option value="none">---</option>
-                                <option value="1">LAPTOP</option>
-                                <option value="2">GSM</option> 
+                                <select class="form-control select" name="id_materiel">
+                                @if ($maters->count())
+                                @foreach($maters as $mater)
+                                <option value="{{ $mater->id }}" {{ $selectedmater== $mater->id ? 'selected="selected"' : '' }}>{{ $mater->designation }}</option>
+                                @endforeach
+                                @endif
                                 </select>
                                 <span class="text-danger error-text id_materiel_error"></span>
                                 </div>
 
                                 <div class="form-group">
                                 <label>Accessoire</label> <br>
-                                <select name="id_accessoire" class="form-control select">
-                                <option value="none">---</option>
-                                <option value="1">CARTABLE</option>
-                                <option value="2">CASQUE</option>
-                                <option value="3">WORKSTATION</option>
+                                 <select class="form-control select" name="id_accessoire">
+                                @if ($acces->count())
+                                @foreach($acces as $acce)
+                                <option value="{{ $acce->id }}" {{ $selectedacces== $acce->id ? 'selected="selected"' : '' }}>{{ $acce->access_name }}</option>
+                                @endforeach
+                                @endif
                                 </select>
                                 <span class="text-danger error-text id_accessoire_error"></span>
                                 </div>
@@ -99,17 +102,17 @@
           </div>
         </div>
  </div>
- 
-
- 
 
 
- 
-                                
 
- 
 
-     @include('attributions.edit-attribution-modal') 
+
+
+
+
+
+
+     @include('attributions.edit-attribution-modal')
 
     <script>
          toastr.options.preventDuplicates = true;
@@ -160,19 +163,19 @@
 
                         //  {data:'id_employe', name:'id_employe'},
                         //  {data:'id_materiel', name:'id_materiel'},
-                        //  {data:'id_accessoire', name:'id_accessoire'}, 
-                         
-                        //{data:'id', name:'id'}, 
-                         {data:'nomprenom', name:'nomprenom'}, 
-                         {data:'designation', name:'designation'},  
-                         {data:'access_name', name:'access_name'},  
-                         {data:'attribute_at', name:'attribute_at'},  
-                         {data:'commentaire', name:'commentaire'},  
+                        //  {data:'id_accessoire', name:'id_accessoire'},
 
-                        //  {data:'mater.designation', name:'mater.designation'}, 
-                        //  {data:'acc.access_name', name:'acc.access_name'},  
-                        //  {data:'att.attribute_at', name:'att.attribute_at'},  
-                        //  {data:'att.commentaire', name:'att.commentaire'}, 
+                        //{data:'id', name:'id'},
+                         {data:'nomprenom', name:'nomprenom'},
+                         {data:'designation', name:'designation'},
+                         {data:'access_name', name:'access_name'},
+                         {data:'attribute_at', name:'attribute_at'},
+                         {data:'commentaire', name:'commentaire'},
+
+                        //  {data:'mater.designation', name:'mater.designation'},
+                        //  {data:'acc.access_name', name:'acc.access_name'},
+                        //  {data:'att.attribute_at', name:'att.attribute_at'},
+                        //  {data:'att.commentaire', name:'att.commentaire'},
 
 
                          {data:'actions', name:'actions', orderable:false, searchable:false},
@@ -187,11 +190,11 @@
                     $('.editAttribution').find('form')[0].reset();
                     $('.editAttribution').find('span.error-text').text('');
                     $.post('<?= route("attributions.get.attribution.details") ?>',{attribution_id:attribution_id}, function(data){
-                        $('.editAttribution').find('input[name="cid"]').val(data.details.id); 
+                        $('.editAttribution').find('input[name="cid"]').val(data.details.id);
                         $('.editAttribution').find('select[name="id_employe"]').val(data.details.id_employe);
                         $('.editAttribution').find('select[name="id_materiel"]').val(data.details.id_materiel);
                         $('.editAttribution').find('select[name="id_accessoire"]').val(data.details.id_accessoire);
-                        $('.editAttribution').find('textarea[name="commentaire"]').val(data.details.commentaire)  
+                        $('.editAttribution').find('textarea[name="commentaire"]').val(data.details.commentaire)
                         $('.editAttribution').modal('show');
                     },'json');
                 });
@@ -228,7 +231,7 @@
 
 
 
-                
+
                 //DELETE attribution RECORD
                 $(document).on('click','#deleteAttributionBtn', function(){
                     var attribution_id = $(this).data('id');

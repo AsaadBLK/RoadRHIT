@@ -12,33 +12,38 @@
                  <form action="<?= route('attributions.update.attribution.details') ?>" method="post" id="update-attribution-form">
                     @csrf
                      <input type="hidden" name="cid">
-                                 <div class="form-group">
+                                      <div class="form-group">
                                 <label>Employé</label> <br>
-                                <select name="id_employe" class="form-control select">
-                                <option value="none">---</option>
-                                <option value="1">ASAAD</option>
-                                <option value="2">ADMIN</option> 
+                                <select class="form-control select" name="id_employe">
+                                @if ($empls->count())
+                                @foreach($empls as $empl)
+                                <option value="{{ $empl->id }}" {{ $selectedempl== $empl->id ? 'selected="selected"' : '' }}>{{ $empl->nomprenom }}</option>
+                                @endforeach
+                                @endif
                                 </select>
                                 <span class="text-danger error-text id_employe_error"></span>
                                 </div>
 
                                 <div class="form-group">
                                 <label>Matériel</label> <br>
-                                <select name="id_materiel" class="form-control select">
-                                <option value="none">---</option>
-                                <option value="1">LAPTOP</option>
-                                <option value="2">GSM</option> 
+                                <select class="form-control select" name="id_materiel">
+                                @if ($maters->count())
+                                @foreach($maters as $mater)
+                                <option value="{{ $mater->id }}" {{ $selectedmater== $mater->id ? 'selected="selected"' : '' }}>{{ $mater->designation }}</option>
+                                @endforeach
+                                @endif
                                 </select>
                                 <span class="text-danger error-text id_materiel_error"></span>
                                 </div>
 
                                 <div class="form-group">
                                 <label>Accessoire</label> <br>
-                                <select name="id_accessoire" class="form-control select">
-                                <option value="none">---</option>
-                                <option value="1">CARTABLE</option>
-                                <option value="2">CASQUE</option>
-                                <option value="3">WORKSTATION</option>
+                                 <select class="form-control select" name="id_accessoire">
+                                @if ($acces->count())
+                                @foreach($acces as $acce)
+                                <option value="{{ $acce->id }}" {{ $selectedacces== $acce->id ? 'selected="selected"' : '' }}>{{ $acce->access_name }}</option>
+                                @endforeach
+                                @endif
                                 </select>
                                 <span class="text-danger error-text id_accessoire_error"></span>
                                 </div>

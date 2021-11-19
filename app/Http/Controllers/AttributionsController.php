@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Attribution;
 use App\Models\Employe;
+use App\Models\Materiel;
+use App\Models\Accessoire;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Yajra\Datatables\Datatables;
@@ -20,9 +22,15 @@ class AttributionsController extends Controller
         //$empls = Employe::where('deleted_at', null)->orderBy('nomprenom')->lists('nomprenom', 'id');
         
     $empls = Employe::all();
-    $selectedempl= Employe::first()->emp_id;
+    $selectedempl = Employe::first()->emp_id;
+
+    $maters = Materiel::all();
+    $selectedmater = Materiel::first()->mater_id;
+
+    $acces = Accessoire::all();
+    $selectedacces = Accessoire::first()->acce_id;
     
-    return view('attributions.attributions-list', compact('empls', 'selectedempl')); 
+    return view('attributions.attributions-list', compact('empls', 'selectedempl','maters', 'selectedmater','acces', 'selectedacces' )); 
     }
 
     //ADD NEW employe
@@ -78,7 +86,7 @@ class AttributionsController extends Controller
                 return '<div class="btn-group">
         <button class="btn btn-sm btn-primary" data-id="' . $row['id'] . '" id="editAttributionBtn"><span class="material-icons">construction</span></button>
         <button class="btn btn-sm btn-danger" data-id="' . $row['id'] . '" id="deleteAttributionBtn"><span class="material-icons">delete_sweep</span></button>
-       <button class="btn btn-sm btn-secondary" data-id="' . $row['id'] . '" id="editAttributionEmailBtn"><span class="material-icons">file_present</span></button>
+       <!--button class="btn btn-sm btn-secondary" data-id="' . $row['id'] . '" id="editAttributionEmailBtn"><span class="material-icons">file_present</span></!--button>
          </div>';
             })
             ->addColumn('checkbox', function ($row) {
@@ -90,10 +98,10 @@ class AttributionsController extends Controller
             ->make(true);
     }
 
-    //GET employe DETAILS
+    //GET attribution DETAILS
     public function getattributionDetails(Request $request)
     {
-        $attribution_id = $request->employe_id;
+        $attribution_id = $request->attribution_id;
         $attributionDetails = Attribution::find($attribution_id); 
         return response()->json(['details' => $attributionDetails]);
     }
