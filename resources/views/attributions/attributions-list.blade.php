@@ -113,6 +113,7 @@
 
 
      @include('attributions.edit-attribution-modal')
+          @include('attributions.show-attribution-modal')
 
     <script>
          toastr.options.preventDuplicates = true;
@@ -198,6 +199,26 @@
                         $('.editAttribution').modal('show');
                     },'json');
                 });
+
+
+
+                //show modal attribution to pdf
+                 $(document).on('click','#showAttributionBtn', function(){
+                    var attribution_id = $(this).data('id');
+                    $('.showAttribution').find('form')[0].reset();
+                    $('.showAttribution').find('span.error-text').text('');
+                    $.post('<?= route("attributions.get.attribution.details") ?>',{attribution_id:attribution_id}, function(data){
+                        $('.showAttribution').find('input[name="cid"]').val(data.details.id);
+                        $('.showAttribution').find('select[name="id_employe"]').val(data.details.id_employe);
+                        $('.showAttribution').find('select[name="id_materiel"]').val(data.details.id_materiel);
+                        $('.showAttribution').find('select[name="id_accessoire"]').val(data.details.id_accessoire);
+                        $('.showAttribution').find('input[name="attribute_at"]').val(data.details.attribute_at);
+                        $('.showAttribution').find('input[name="commentaire"]').val(data.details.commentaire)
+                        $('.showAttribution').modal('show');
+                    },'json');
+                });
+                //show modal attribution to pdf
+
 
 
 //UPDATE Attribution DETAILS

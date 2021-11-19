@@ -18,7 +18,6 @@ class AttributionsController extends Controller
     //attributions LIST
     public function index()
     {
-
         //$empls = Employe::where('deleted_at', null)->orderBy('nomprenom')->lists('nomprenom', 'id');
         
     $empls = Employe::all();
@@ -29,8 +28,9 @@ class AttributionsController extends Controller
 
     $acces = Accessoire::all();
     $selectedacces = Accessoire::first()->acce_id;
+
     
-    return view('attributions.attributions-list', compact('empls', 'selectedempl','maters', 'selectedmater','acces', 'selectedacces' )); 
+    return view('attributions.attributions-list', compact('empls', 'selectedempl','maters', 'selectedmater','acces', 'selectedacces')); 
     }
 
     //ADD NEW employe
@@ -66,7 +66,7 @@ class AttributionsController extends Controller
     public function getAttributionsList(Request $request)
     {
         $attributions = DB::select(DB::raw("
-            SELECT att.id , nomprenom , designation, access_name, attribute_at, att.commentaire
+            SELECT att.id , businessEmp, nomprenom , designation, access_name, attribute_at, att.commentaire
             FROM attributions AS att
             INNER JOIN
             employes AS emp
@@ -86,7 +86,7 @@ class AttributionsController extends Controller
                 return '<div class="btn-group">
         <button class="btn btn-sm btn-primary" data-id="' . $row['id'] . '" id="editAttributionBtn"><span class="material-icons">construction</span></button>
         <button class="btn btn-sm btn-danger" data-id="' . $row['id'] . '" id="deleteAttributionBtn"><span class="material-icons">delete_sweep</span></button>
-       <!--button class="btn btn-sm btn-secondary" data-id="' . $row['id'] . '" id="editAttributionEmailBtn"><span class="material-icons">file_present</span></!--button>
+       <button class="btn btn-sm btn-secondary" data-id="' . $row['id'] . '" id="showAttributionBtn"><span class="material-icons">file_present</span></button>
          </div>';
             })
             ->addColumn('checkbox', function ($row) {
