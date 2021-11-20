@@ -20,13 +20,18 @@
                     </x-jet-nav-link>
                 </div>
 
+
+                @if(auth()->user()->current_team_id == 1 || auth()->user()->current_team_id == 2 || auth()->user()->current_team_id == 3)
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('employes.employes.list') }}" :active="request()->routeIs('employes.employes.list')">
                         {{ __('Employés') }}
                     </x-jet-nav-link>
                 </div>
+                @endif
 
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+
+                @if(auth()->user()->current_team_id == 1 || auth()->user()->current_team_id == 2)
+               <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('materiels.materiels.list') }}" :active="request()->routeIs('materiels.materiels.list')">
                         {{ __('Matériel') }}
                     </x-jet-nav-link>
@@ -44,7 +49,7 @@
                         {{ __('Attribution') }}
                     </x-jet-nav-link>
                 </div>
-
+                @endif
 
 
 
