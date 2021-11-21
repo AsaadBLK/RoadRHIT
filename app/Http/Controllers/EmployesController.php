@@ -136,7 +136,8 @@ class EmployesController extends Controller
         } else {
 
             $employe = Employe::find($employe_id);
-            if (Str::of($request->email)->contains('@sgs.com') && Str::of($request->status_leave)->exactly('Actif')) {
+            if (Str::of($request->email)->contains('@sgs.com') && Str::of($request->status_leave)->exactly('Actif')
+                && Str::of($request->leave_at)->isEmpty()) {
 
             $employe->nomprenom = $request->nomprenom;
             $employe->matricule = $request->matricule;
@@ -154,7 +155,8 @@ class EmployesController extends Controller
             } else {  return response()->json(['code' => 0, 'msg' => 'Priére de revérifier !']); }
         } // end if str 
 
-            else if (Str::of($request->email)->contains('@sgs.com') && Str::of($request->status_leave)->exactly('Inactif')) {
+            else if (Str::of($request->email)->contains('@sgs.com') && Str::of($request->status_leave)->exactly('Inactif')
+                 && Str::of($request->leave_at)->isEmpty()) {
             
                     $employe->nomprenom = $request->nomprenom;
                     $employe->matricule = $request->matricule;
@@ -171,11 +173,14 @@ class EmployesController extends Controller
                     if ($query) { return response()->json(['code' => 1, 'msg' => 'Les détails ont été mis à jour']);
                     } else { return response()->json(['code' => 0, 'msg' => 'Priére de revérifier !']);}
 
-            }// end else if str
+            } // end else if str
 
+            // else if (Str::of($request->status_leave)->exactly('Inactif') && Str::of($request->leave_at)->isNotEmpty) {
+            //     return response()->json(['code' => 0, 'msg' => 'Il est déja Inactif !']);
+            // }// end else if str
         
         else {
-                return response()->json(['code' => 0, 'msg' => 'Priére de revérifier votre email !']);
+                return response()->json(['code' => 0, 'msg' => 'Priére de revérifier votre email & Statut départ !']);
             } // end else str
     } // end else validator
 }

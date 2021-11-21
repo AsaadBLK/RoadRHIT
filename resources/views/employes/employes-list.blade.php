@@ -29,7 +29,7 @@
                                     <th>Date demande</th>
                                     {{-- <th>Création par IT</th> --}}
                                     <th>Date Création</th>
-                                    <th>Traiter par</th>
+                                    <th>Statut</th>
                                     <th>Actions <button class="btn btn-sm btn-danger d-none" id="deleteAllBtn">Tout supprimer</button></th>
                                 </thead>
                                 <tbody></tbody>
@@ -336,11 +336,12 @@
                          {data:'ville', name:'ville'},
                          {data:'status_reqtoIT', name:'status_reqtoIT'},
                          {data:'email_request_at', name:'email_request_at'},
-                         //{data:'status_crebyIT', name:'status_crebyIT'},
                          {data:'email_create_at', name:'email_create_at'},
-                        //  {data:'entityEmp', name:'entityEmp'},
-                        //  {data:'businessEmp', name:'businessEmp'},
-                         {data:'action_by', name:'action_by'},
+                         {data:'status_leave', name:'status_leave'},
+                         //{data:'status_crebyIT', name:'status_crebyIT'},
+                        //{data:'entityEmp', name:'entityEmp'},
+                        //{data:'businessEmp', name:'businessEmp'},
+                        //{data:'action_by', name:'action_by'},
 
 
                          {data:'actions', name:'actions', orderable:false, searchable:false},
@@ -366,6 +367,8 @@
                         $('.editEmploye').find('select[name="businessEmp"]').val(data.details.businessEmp);
                         $('.editEmploye').find('select[name="status_reqtoIT"]').val(data.details.status_reqtoIT);
                         $('.editEmploye').find('select[name="status_crebyIT"]').val(data.details.status_crebyIT);
+                        $('.editEmploye').find('select[name="status_leave"]').val(data.details.status_leave);
+                        $('.editEmploye').find('input[name="leave_at"]').val(data.details.leave_at);
                         $('.editEmploye').find('select[name="action_by"]').val(data.details.action_by);
                         $('.editEmploye').modal('show');
                     },'json');

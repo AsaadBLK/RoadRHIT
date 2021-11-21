@@ -242,18 +242,22 @@
 
 
                                  @if(auth()->user()->current_team_id == 1 || auth()->user()->current_team_id == 3)
-                            
                                 <div class="form-group">
                                 <label>Départ (Statut)</label> 
                                 <select name="status_leave" class="form-control select">
-                                <option value="Actif">---</option>
+                                <option value="none">---</option>
                                 <option value="Actif">Actif</option>
                                 <option value="Inactif">Inactif</option>
                                 </select>
                                  <span class="text-danger error-text status_leave_error"></span>
                                 </div>   
-                                 
                                 @endif
+
+                                <div class="form-group">
+                                <label>Date Départ</label>
+                                <input type="text" name="leave_at" class="form-control" readonly>
+                                <span class="text-danger error-text leave_at_error"></span>
+                                </div>
 
                         <div class="form-group">
                          <button type="submit" class="btn btn-xs-block btn-success">Sauvegarder</button>
