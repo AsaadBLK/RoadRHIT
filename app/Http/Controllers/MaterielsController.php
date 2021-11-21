@@ -18,7 +18,12 @@ class MaterielsController extends Controller
     //materiels LIST
     public function index()
     {
+        if (auth()->user()->current_team_id == 1 || auth()->user()->current_team_id == 2) {
         return view('materiels.materiels-list');
+        }
+        else {
+            return view('dashboard');
+        }
     }
 
     //ADD NEW Materiel
@@ -62,8 +67,10 @@ class MaterielsController extends Controller
     // GET ALL Materiels
     public function getMaterielsList(Request $request)
     {
-        $materiels = Materiel::all();
-        return DataTables::of($materiels)
+        if (auth()->user()->current_team_id == 1 || auth()->user()->current_team_id == 2) {
+
+            $materiels = Materiel::all();
+            return DataTables::of($materiels)
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
                 return '<div class="btn-group">
@@ -77,14 +84,26 @@ class MaterielsController extends Controller
 
             ->rawColumns(['actions', 'checkbox'])
             ->make(true);
+        
+        }  // end check
+        else {
+            return view('dashboard');
+        }
     }
 
     //GET Materiel DETAILS
     public function getmaterielDetails(Request $request)
     {
+        if (auth()->user()->current_team_id == 1 || auth()->user()->current_team_id == 2) {
+
         $materiel_id = $request->materiel_id;
         $materielDetails = Materiel::find($materiel_id);
         return response()->json(['details' => $materielDetails]);
+        
+        }  // end check
+        else {
+            return view('dashboard');
+        }
     }
 
     //UPDATE Materiel DETAILS

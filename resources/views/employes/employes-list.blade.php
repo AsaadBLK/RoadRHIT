@@ -27,7 +27,7 @@
                                     <th>Ville</th>
                                     <th>Demande au IT</th>
                                     <th>Date demande</th>
-                                    <th>Création par IT</th>
+                                    {{-- <th>Création par IT</th> --}}
                                     <th>Date Création</th>
                                     <th>Traiter par</th>
                                     <th>Actions <button class="btn btn-sm btn-danger d-none" id="deleteAllBtn">Tout supprimer</button></th>
@@ -336,7 +336,7 @@
                          {data:'ville', name:'ville'},
                          {data:'status_reqtoIT', name:'status_reqtoIT'},
                          {data:'email_request_at', name:'email_request_at'},
-                         {data:'status_crebyIT', name:'status_crebyIT'},
+                         //{data:'status_crebyIT', name:'status_crebyIT'},
                          {data:'email_create_at', name:'email_create_at'},
                         //  {data:'entityEmp', name:'entityEmp'},
                         //  {data:'businessEmp', name:'businessEmp'},

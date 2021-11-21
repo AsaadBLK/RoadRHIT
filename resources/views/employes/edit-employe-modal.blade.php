@@ -202,22 +202,18 @@
                               
 
                                 @if(auth()->user()->current_team_id == 1 || auth()->user()->current_team_id == 2)
-                                {{-- <div class="form-group">
-                                <label>Création d'adresse email (IT)</label> <br>
-                                <select name="status_crebyIT" class="form-control select">
-                                <option value="none">---</option>
-                                <option value="Créée">Créée</option>
-                                <option value="Non Créée">Non Créée</option>
-                                </select>
-                                 <span class="text-danger error-text status_crebyIT_error"></span>
-                                </div> --}} 
                                 <div class="form-group">
                                 <label>Email</label>
                                 <input type="email" name="email" class="form-control" required>
                                 <span class="text-danger error-text email_error"></span>
                                 </div>
-
-
+                                
+                                @elseif (auth()->user()->current_team_id != 1 || auth()->user()->current_team_id != 2)
+                                <div class="form-group">
+                                <label>Email</label>
+                                <input type="email" name="email" class="form-control" readonly>
+                                <span class="text-danger error-text email_error"></span>
+                                </div>
                                 @endif
  
 

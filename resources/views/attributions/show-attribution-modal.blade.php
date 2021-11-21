@@ -11,51 +11,6 @@
                  <form action="<?= route('attributions.update.attribution.details') ?>" method="post" id="update-attribution-form">
                     @csrf
                      <input type="hidden" name="cid">
-                                {{-- <div class="form-group">
-                                <label>Employé</label> <br>
-                                <select class="form-control select" name="id_employe">
-                                @if ($empls->count())
-                                @foreach($empls as $empl)
-                                <option value="{{ $empl->id }}" {{ $selectedempl== $empl->id ? 'selected="selected"' : '' }}>{{ $empl->nomprenom }}</option>
-                                @endforeach
-                                @endif
-                                </select>
-                                <span class="text-danger error-text id_employe_error"></span>
-                                </div>
-
-                                <div class="form-group">
-                                <label>Matériel</label> <br>
-                                <select class="form-control select" name="id_materiel">
-                                @if ($maters->count())
-                                @foreach($maters as $mater)
-                                <option value="{{ $mater->id }}" {{ $selectedmater== $mater->id ? 'selected="selected"' : '' }}>{{ $mater->designation }}</option>
-                                @endforeach
-                                @endif
-                                </select>
-                                <span class="text-danger error-text id_materiel_error"></span>
-                                </div>
-
-                                <div class="form-group">
-                                <label>Accessoire</label> <br>
-                                 <select class="form-control select" name="id_accessoire">
-                                @if ($acces->count())
-                                @foreach($acces as $acce)
-                                <option value="{{ $acce->id }}" {{ $selectedacces== $acce->id ? 'selected="selected"' : '' }}>{{ $acce->access_name }}</option>
-                                @endforeach
-                                @endif
-                                </select>
-                                <span class="text-danger error-text id_accessoire_error"></span>
-                                </div>
-
-                                 <div class="form-group">
-                                    <label for="">Commentaire</label>
-                                    <textarea class="form-control" name="commentaire"> </textarea>
-                                    <span class="text-danger error-text commentaire_error"></span>
-                                </div>
-                        <div class="form-group">
-                         <button type="submit" class="btn btn-xs-block btn-success">Sauvegarder</button>
-                     </div> --}}
-
                  </form>
 
 
@@ -145,7 +100,7 @@
 		</tr>
 	<tr>
 		<td style="border-top: 1px solid #000000; border-bottom: 2px solid #000000; border-left: 2px solid #000000; border-right: 1px solid #000000" height="22" align="left" valign=bottom bgcolor="#FFFFFF"><b><font size=3 color="#000000">Commentaire:</font></b></td>
-		<td style="border-top: 1px solid #000000; border-bottom: 2px solid #000000; border-left: 1px solid #000000; border-right: 2px solid #000000" colspan=9 align="center" valign=bottom bgcolor="#FFFFFF"><b><font size=3 color="#000000"> <input type="text" name="commentaire" style="background-color:#fff;border:none;font-weight:bold;height:27px;text-align:center;" class="form-control" readonly /> </font></b></td>
+		<td style="border-top: 1px solid #000000; border-bottom: 2px solid #000000; border-left: 1px solid #000000; border-right: 2px solid #000000" colspan=9 align="center" valign=bottom bgcolor="#FFFFFF"><b><font size=3 color="#000000"> <input type="text" name="commentaire" style="color:#000000;background-color:#fff;border:none;font-weight:bold;height:27px;text-align:center;" class="form-control" readonly /> </font></b></td>
 		</tr>
 	<tr>
 		<td height="22" align="left" valign=bottom bgcolor="#FFFFFF"><font size=3 color="#000000"><br></font></td>
@@ -171,11 +126,31 @@
 	</tr>
 	<tr>
 		<td style="border-top: 2px solid #000000; border-bottom: 1px solid #000000; border-left: 2px solid #000000; border-right: 1px solid #000000" colspan=2 height="21" align="left" valign=bottom bgcolor="#FFFFFF"><b><font size=3 color="#000000">Nom et pr&eacute;nom:</font></b></td>
-		<td style="border-top: 2px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 2px solid #000000" colspan=8 align="center" valign=bottom bgcolor="#FFFFFF"><b><font size=3 color="#000000">{{ $empl->nomprenom  }}</font></b></td>
+		<td style="border-top: 2px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 2px solid #000000" colspan=8 align="center" valign=bottom bgcolor="#FFFFFF"><b><font size=3 color="#000000">
+        
+<select class="form-control select" name="id_employe" disabled="disabled" style="color:#000000;background-color:#fff;border:none;font-weight:bold;height:30px;text-align:center;">
+@if ($empls->count())
+@foreach($empls as $empl)
+<option value="{{ $empl->id }}" {{ $selectedempl== $empl->id ? 'selected="selected"' : '' }}>{{ $empl->nomprenom }}</option>
+@endforeach
+@endif
+</select>
+            
+        </font></b></td>
 		</tr>
 	<tr>
 		<td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 2px solid #000000; border-right: 1px solid #000000" colspan=2 height="21" align="left" valign=bottom bgcolor="#FFFFFF"><b><font size=3 color="#000000">Division D&eacute;partement:</font></b></td>
-		<td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 2px solid #000000" colspan=8 align="center" valign=bottom bgcolor="#FFFFFF"><b><font size=3 color="#000000">{{ $empl->businessEmp  }}</font></b></td>
+		<td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 2px solid #000000" colspan=8 align="center" valign=bottom bgcolor="#FFFFFF"><b><font size=3 color="#000000">
+        
+            <select class="form-control select" name="id_employe" disabled="disabled" style="color:#000000;background-color:#fff;border:none;font-weight:bold;height:30px;text-align:center;">
+@if ($empls->count())
+@foreach($empls as $empl)
+<option value="{{ $empl->id }}" {{ $selectedempl== $empl->id ? 'selected="selected"' : '' }}>{{ $empl->businessEmp }}</option>
+@endforeach
+@endif
+</select>
+
+        </font></b></td>
 		</tr>
 	{{-- <tr>
 		<td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 2px solid #000000; border-right: 1px solid #000000" colspan=2 height="21" align="left" valign=bottom bgcolor="#FFFFFF"><b><font size=3 color="#000000">Fonction :</font></b></td>
@@ -183,7 +158,7 @@
 		</tr> --}}
 	<tr>
 		<td style="border-top: 1px solid #000000; border-bottom: 2px solid #000000; border-left: 2px solid #000000; border-right: 1px solid #000000" colspan=2 height="22" align="left" valign=bottom bgcolor="#FFFFFF"><b><font size=3 color="#000000">Date d'attribution:</font></b></td>
-		<td style="border-top: 1px solid #000000; border-bottom: 2px solid #000000; border-left: 1px solid #000000; border-right: 2px solid #000000" colspan=8 align="center" valign=bottom bgcolor="#FFFFFF" sdnum="1033;1033;M/D/YYYY"><b><font size=3 color="#000000"> <input type="text" name="attribute_at" style="background-color:#fff;border:none;font-weight:bold;height:27px;text-align:center;" class="form-control" readonly />  </font></b></td>
+		<td style="border-top: 1px solid #000000; border-bottom: 2px solid #000000; border-left: 1px solid #000000; border-right: 2px solid #000000" colspan=8 align="center" valign=bottom bgcolor="#FFFFFF" sdnum="1033;1033;M/D/YYYY"><b><font size=3 color="#000000"> <input type="text" name="attribute_at" style="color:#000000;background-color:#fff;border:none;font-weight:bold;height:27px;text-align:center;" class="form-control" readonly />  </font></b></td>
 		</tr>
 	<tr>
 		<td height="22" align="left" valign=bottom bgcolor="#FFFFFF"><font size=3 color="#000000"><br></font></td>

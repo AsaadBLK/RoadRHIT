@@ -19,19 +19,26 @@ class AttributionsController extends Controller
     public function index()
     {
         //$empls = Employe::where('deleted_at', null)->orderBy('nomprenom')->lists('nomprenom', 'id');
+
+        if (auth()->user()->current_team_id == 1 || auth()->user()->current_team_id == 2) {
+
+            $empls = Employe::all();
+            $selectedempl = Employe::first()->emp_id;
+            $maters = Materiel::all();
+            $selectedmater = Materiel::first()->mater_id;
+            $acces = Accessoire::all();
+            $selectedacces = Accessoire::first()->acce_id;
+
+            return view('attributions.attributions-list', compact('empls', 'selectedempl', 'maters', 'selectedmater', 'acces', 'selectedacces')); 
+
+        } else {
+            return view('dashboard');
+        }
         
-    $empls = Employe::all();
-    $selectedempl = Employe::first()->emp_id;
 
-    $maters = Materiel::all();
-    $selectedmater = Materiel::first()->mater_id;
 
-    $acces = Accessoire::all();
-    $selectedacces = Accessoire::first()->acce_id;
-
-    
-    return view('attributions.attributions-list', compact('empls', 'selectedempl','maters', 'selectedmater','acces', 'selectedacces')); 
-    }
+        
+   }
 
     //ADD NEW employe
     public function addAttribution(Request $request)
@@ -65,6 +72,9 @@ class AttributionsController extends Controller
     // GET ALL employes
     public function getAttributionsList(Request $request)
     {
+
+        if (auth()->user()->current_team_id == 1 || auth()->user()->current_team_id == 2) {
+
         $attributions = DB::select(DB::raw("
             SELECT att.id , businessEmp, nomprenom , designation, access_name, attribute_at, att.commentaire
             FROM attributions AS att
@@ -96,14 +106,26 @@ class AttributionsController extends Controller
             ->rawColumns(['actions', 'checkbox'])
             //->rawColumns(['id'])
             ->make(true);
+
+              }  // end check
+        else {
+            return view('dashboard');
+        }
     }
 
     //GET attribution DETAILS
     public function getattributionDetails(Request $request)
     {
+        if (auth()->user()->current_team_id == 1 || auth()->user()->current_team_id == 2) {
+
         $attribution_id = $request->attribution_id;
         $attributionDetails = Attribution::find($attribution_id); 
         return response()->json(['details' => $attributionDetails]);
+        
+        }  // end check
+        else {
+            return view('dashboard');
+        }
     }
 
   

@@ -9,8 +9,8 @@
             <h1>Thank you for your patience while we are renovating</h3>
             <hr>
             <div class="progress">
-                <div class="progress-bar" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
-                    30%
+                <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+                    80%
                 </div>
             </div>
         </div>

@@ -17,7 +17,12 @@ class AccessoiresController extends Controller
     //accessoires LIST
     public function index()
     {
-        return view('accessoires.accessoires-list');
+        if (auth()->user()->current_team_id == 1 || auth()->user()->current_team_id == 2) {
+            return view('accessoires.accessoires-list');
+        } else {
+            return view('dashboard');
+        }
+        
     }
 
     //ADD NEW Accessoire
@@ -49,6 +54,9 @@ class AccessoiresController extends Controller
     // GET ALL Accessoires
     public function getAccessoiresList(Request $request)
     {
+
+        if (auth()->user()->current_team_id == 1 || auth()->user()->current_team_id == 2) {
+            
         $accessoires = Accessoire::all();
         return DataTables::of($accessoires)
             ->addIndexColumn()
@@ -64,14 +72,26 @@ class AccessoiresController extends Controller
 
             ->rawColumns(['actions', 'checkbox'])
             ->make(true);
+
+        }  // end check
+        else {
+            return view('dashboard');
+        }
     }
 
     //GET Accessoire DETAILS
     public function getaccessoireDetails(Request $request)
     {
+        if (auth()->user()->current_team_id == 1 || auth()->user()->current_team_id == 2) {
+
         $accessoire_id = $request->accessoire_id;
         $accessoireDetails = Accessoire::find($accessoire_id);
         return response()->json(['details' => $accessoireDetails]);
+        
+        }  // end check
+        else {
+            return view('dashboard');
+        }
     }
 
     //UPDATE Accessoire DETAILS

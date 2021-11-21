@@ -16,10 +16,10 @@ class MaterielPolicy
      * @param  \App\Models\User  $user
      * @return mixed
      */
-    public function viewAny(User $user, Materiel $materiel)
+    public function getMaterielsList(User $user, Request $request)
     {
         //return true;
-        return auth()->user()->current_team_id == 1 ? true : false;
+        return  auth()->user()->current_team_id == 1 || auth()->user()->current_team_id == 2 ? true : false;
     }
 
     /**
@@ -31,9 +31,7 @@ class MaterielPolicy
      */
     public function view(User $user, Materiel $materiel)
     {
-        //return $user->belongsToMateriel($materiel);
-        return auth()->user()->current_team_id == 1 ? true : false;
-
+       return auth()->user()->current_team_id == 1 || auth()->user()->current_team_id == 2 ? true : false;
     }
 
     /**
@@ -44,7 +42,7 @@ class MaterielPolicy
      */
     public function create(User $user, Materiel $materiel)
     {
-        return auth()->user()->current_team_id == 1 ? true : false;
+        return auth()->user()->current_team_id == 1 || auth()->user()->current_team_id == 2 ? true : false;
     }
 
     /**
@@ -56,8 +54,7 @@ class MaterielPolicy
      */
     public function update(User $user, Materiel $materiel)
     {
-        return auth()->user()->current_team_id == 1 ? true : false;
-        //return $user->ownsMateriel($materiel);
+        return auth()->user()->current_team_id == 1 || auth()->user()->current_team_id == 2 ? true : false;
     }
 
     /**
@@ -69,8 +66,7 @@ class MaterielPolicy
      */
     public function addMaterielMember(User $user, Materiel $materiel)
     {
-        return auth()->user()->current_team_id == 1 ? true : false;
-        //return $user->ownsMateriel($materiel);
+       return auth()->user()->current_team_id == 1 || auth()->user()->current_team_id == 2 ? true : false;
     }
 
     /**
@@ -82,8 +78,7 @@ class MaterielPolicy
      */
     public function updateMaterielMember(User $user, Materiel $materiel)
     {
-        return auth()->user()->current_team_id == 1 ? true : false;
-        //return $user->ownsMateriel($materiel);
+       return auth()->user()->current_team_id == 1 || auth()->user()->current_team_id == 2 ? true : false;
     }
 
     /**
@@ -95,8 +90,7 @@ class MaterielPolicy
      */
     public function removeMaterielMember(User $user, Materiel $materiel)
     {
-        return auth()->user()->current_team_id == 1 ? true : false;
-        //return $user->ownsMateriel($materiel);
+       return auth()->user()->current_team_id == 1 || auth()->user()->current_team_id == 2 ? true : false;
     }
 
     /**
@@ -108,7 +102,6 @@ class MaterielPolicy
      */
     public function delete(User $user, Materiel $materiel)
     {
-        return auth()->user()->current_team_id == 1 ? true : false;
-        //return $user->ownsMateriel($materiel);
+       return auth()->user()->current_team_id == 1 || auth()->user()->current_team_id == 2 ? true : false;
     }
 }
