@@ -136,7 +136,8 @@ class EmployesController extends Controller
         } else {
 
             $employe = Employe::find($employe_id);
-            if (Str::of($request->email)->contains('@sgs.com')) {
+            if (Str::of($request->email)->contains('@sgs.com') && Str::of($request->status_leave)->exactly('Actif')) {
+
             $employe->nomprenom = $request->nomprenom;
             $employe->matricule = $request->matricule;
             $employe->respH = $request->respH;
@@ -146,15 +147,33 @@ class EmployesController extends Controller
             $employe->status_crebyIT = "Créée";
             $employe->email_create_at = date('Y-m-d H:i:s'); 
             $employe->email = $request->email;
-            $employe->status_leave = "Active";
+            $employe->status_leave = $request->status_leave;
             //$employe->action_by = Auth::user()->name;
             $query = $employe->save();
-            if ($query) {
-                return response()->json(['code' => 1, 'msg' => 'Les détails ont été mis à jour']);
-            } else {
-                return response()->json(['code' => 0, 'msg' => 'Priére de revérifier !']);
-            }
+            if ($query) { return response()->json(['code' => 1, 'msg' => 'Les détails ont été mis à jour']);
+            } else {  return response()->json(['code' => 0, 'msg' => 'Priére de revérifier !']); }
         } // end if str 
+
+            else if (Str::of($request->email)->contains('@sgs.com') && Str::of($request->status_leave)->exactly('Inactif')) {
+            
+                    $employe->nomprenom = $request->nomprenom;
+                    $employe->matricule = $request->matricule;
+                    $employe->respH = $request->respH;
+                    $employe->ville = $request->ville;
+                    $employe->entityEmp = $request->entityEmp;
+                    $employe->businessEmp = $request->businessEmp;
+                    $employe->status_crebyIT = "Créée";
+                    $employe->email_create_at = date('Y-m-d H:i:s');
+                    $employe->email = $request->email;
+                    $employe->status_leave = $request->status_leave;
+                    $employe->leave_at = date('Y-m-d H:i:s');
+                    $query = $employe->save();
+                    if ($query) { return response()->json(['code' => 1, 'msg' => 'Les détails ont été mis à jour']);
+                    } else { return response()->json(['code' => 0, 'msg' => 'Priére de revérifier !']);}
+
+            }// end else if str
+
+        
         else {
                 return response()->json(['code' => 0, 'msg' => 'Priére de revérifier votre email !']);
             } // end else str
