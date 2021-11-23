@@ -2,10 +2,19 @@
 
 @section('content')
 
+
 <div class="py-12">
+  
+
+<hr class="mt-2 mb-3"/>
+ @section('gridtitle', 'Liste des employés')
+ @include('layouts.grid')
+<hr class="mt-2 mb-3"/>
+ 
+    
+
           <div class="row" style="margin-top: 45px">
-
-
+ 
               <div class="col-md-12">
                 {{-- <input type="text" name="searchfor" id="" class="form-control"> --}}
                     <div class="card">

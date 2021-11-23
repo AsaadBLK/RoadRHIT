@@ -61,7 +61,7 @@ class AccessoiresController extends Controller
         return DataTables::of($accessoires)
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
-        return '<div class="btn-group">
+        return '<div class="btn-group" style="width:90px;">
         <button class="btn btn-sm btn-primary" data-id="' . $row['id'] . '" id="editAccessoireBtn"><span class="material-icons">construction</span></button>
         <button class="btn btn-sm btn-danger" data-id="' . $row['id'] . '" id="deleteAccessoireBtn"><span class="material-icons">delete_sweep</span></button>
         </div>';

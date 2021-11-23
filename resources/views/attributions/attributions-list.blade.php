@@ -2,6 +2,14 @@
 
 @section('content')
     <div class="py-12">
+
+
+<hr class="mt-2 mb-3"/>
+@section('gridtitle', 'Liste des attributions')
+ @include('layouts.grid')
+<hr class="mt-2 mb-3"/>
+
+
         <div class="row" style="margin-top: 45px">
             <div class="col-md-12">
 
@@ -160,25 +168,14 @@
                      "aLengthMenu":[[5,10,25,50,-1],[5,10,25,50,"All"]],
                      columns:[
                          {data:'checkbox', name:'checkbox', orderable:false, searchable:false},
-                         {data:'DT_RowIndex', name:'DT_RowIndex'},
-
-                        //  {data:'id_employe', name:'id_employe'},
-                        //  {data:'id_materiel', name:'id_materiel'},
-                        //  {data:'id_accessoire', name:'id_accessoire'},
-
+                         {data:'DT_RowIndex', name:'DT_RowIndex'}, 
                         //{data:'id', name:'id'},
                          {data:'nomprenom', name:'nomprenom'},
                          {data:'designation', name:'designation'},
                          {data:'access_name', name:'access_name'},
                          {data:'attribute_at', name:'attribute_at'},
-                         {data:'commentaire', name:'commentaire'},
-
-                        //  {data:'mater.designation', name:'mater.designation'},
-                        //  {data:'acc.access_name', name:'acc.access_name'},
-                        //  {data:'att.attribute_at', name:'att.attribute_at'},
-                        //  {data:'att.commentaire', name:'att.commentaire'},
-
-
+                         {data:'commentaire', name:'commentaire'}, 
+ 
                          {data:'actions', name:'actions', orderable:false, searchable:false},
                      ]
                 }).on('draw', function(){

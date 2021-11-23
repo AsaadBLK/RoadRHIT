@@ -765,6 +765,39 @@ select {
 [type='file']:focus {
 	outline: 1px auto -webkit-focus-ring-color;
 }
+.container {
+	width: 100%;
+}
+@media (min-width: 640px) {
+
+	.container {
+		max-width: 640px;
+	}
+}
+@media (min-width: 768px) {
+
+	.container {
+		max-width: 768px;
+	}
+}
+@media (min-width: 1024px) {
+
+	.container {
+		max-width: 1024px;
+	}
+}
+@media (min-width: 1280px) {
+
+	.container {
+		max-width: 1280px;
+	}
+}
+@media (min-width: 1536px) {
+
+	.container {
+		max-width: 1536px;
+	}
+}
 .prose {
 	color: #374151;
 	max-width: 65ch;
@@ -1069,6 +1102,9 @@ select {
 .prose > :last-child {
 	margin-bottom: 0;
 }
+.static {
+	position: static;
+}
 .fixed {
 	position: fixed;
 }
@@ -1101,6 +1137,9 @@ select {
 }
 .col-span-6 {
 	grid-column: span 6 / span 6;
+}
+.float-right {
+	float: right;
 }
 .mx-auto {
 	margin-left: auto;
@@ -1175,6 +1214,9 @@ select {
 .mb-4 {
 	margin-bottom: 1rem;
 }
+.ml-auto {
+	margin-left: auto;
+}
 .-mt-px {
 	margin-top: -1px;
 }
@@ -1186,6 +1228,9 @@ select {
 }
 .inline-flex {
 	display: inline-flex;
+}
+.table {
+	display: table;
 }
 .grid {
 	display: grid;
@@ -1321,6 +1366,9 @@ select {
 }
 .cursor-pointer {
 	cursor: pointer;
+}
+.resize {
+	resize: both;
 }
 .list-inside {
 	list-style-position: inside;
@@ -1581,7 +1629,7 @@ select {
 	padding-bottom: 2rem;
 }
 .py-12 {
-	padding-top: 3rem;
+	/*padding-top: 3rem;*/
 	padding-bottom: 3rem;
 }
 .py-10 {

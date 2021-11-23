@@ -2,7 +2,14 @@
 
 @section('content')
 <div class="container">
-          <div class="row" style="margin-top: 45px">
+
+
+<hr class="mt-2 mb-3"/>
+@section('gridtitle', 'Liste des accessoires')
+@include('layouts.grid')
+<hr class="mt-2 mb-3"/>
+
+          <div class="row" style="margin-top: 5px">
               <div class="col-md-8">
 
                 {{-- <input type="text" name="searchfor" id="" class="form-control"> --}}
