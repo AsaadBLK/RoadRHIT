@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmployesController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MaterielsController;
 use App\Http\Controllers\AccessoiresController;
 use App\Http\Controllers\AttributionsController;
@@ -74,7 +75,7 @@ Route::post('/deleteSelectedattributions', [AttributionsController::class, 'dele
 
 
 
-
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('index');
 
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {

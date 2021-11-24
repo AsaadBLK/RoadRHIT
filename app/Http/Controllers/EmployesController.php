@@ -57,14 +57,16 @@ class EmployesController extends Controller
     // GET ALL employes
     public function getEmployesList(Request $request)
     {
+        if(auth()->user()->current_team_id == 1 || auth()->user()->current_team_id == 2) {
         $employes = Employe::all();
         return DataTables::of($employes)
+        //(json_decode(json_encode($employes), true))
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
         return '<div class="btn-group">
         <button class="btn btn-sm btn-primary" data-id="' . $row['id'] . '" id="editEmployeBtn"><span class="material-icons">construction</span></button>
         <button class="btn btn-sm btn-danger" data-id="' . $row['id'] . '" id="deleteEmployeBtn"><span class="material-icons">delete_sweep</span></button>
-       <button class="btn btn-sm btn-secondary" data-id="' . $row['id'] . '" id="editEmployeEmailBtn"><span class="material-icons">email</span></button>
+        <button class="btn btn-sm btn-secondary" data-id="' . $row['id'] . '" id="editEmployeEmailBtn"><span class="material-icons">email</span></button>
          </div>';
             })
             ->addColumn('checkbox', function ($row) {
@@ -73,6 +75,27 @@ class EmployesController extends Controller
 
             ->rawColumns(['actions', 'checkbox'])
             ->make(true);
+            }
+
+            else if(auth()->user()->current_team_id == 3) {
+        $employes = Employe::all();
+        return DataTables::of($employes)
+        //(json_decode(json_encode($employes), true))
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+        return '<div class="btn-group">
+        <button class="btn btn-sm btn-primary" data-id="' . $row['id'] . '" id="editEmployeBtn"><span class="material-icons">construction</span></button>
+        <button class="btn btn-sm btn-secondary" data-id="' . $row['id'] . '" id="editEmployeEmailBtn"><span class="material-icons">email</span></button>
+         </div>';
+            })
+            ->addColumn('checkbox', function ($row) {
+                return '<input type="checkbox" name="employe_checkbox" data-id="' . $row['id'] . '"><label></label>';
+            })
+
+            ->rawColumns(['actions', 'checkbox'])
+            ->make(true);
+            }
+
     }
 
     //GET employe DETAILS

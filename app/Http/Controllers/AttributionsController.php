@@ -29,15 +29,15 @@ class AttributionsController extends Controller
             $acces = Accessoire::all();
             $selectedacces = Accessoire::first()->acce_id;
 
-            return view('attributions.attributions-list', compact('empls', 'selectedempl', 'maters', 'selectedmater', 'acces', 'selectedacces')); 
+            return view('attributions.attributions-list', compact('empls', 'selectedempl', 'maters', 'selectedmater', 'acces', 'selectedacces'));
 
         } else {
             return view('dashboard');
         }
-        
 
 
-        
+
+
    }
 
     //ADD NEW employe
@@ -57,8 +57,8 @@ class AttributionsController extends Controller
             $attribution->id_materiel = $request->id_materiel;
             $attribution->id_accessoire = $request->id_accessoire;
             $attribution->id_employe = $request->id_employe;
-            $attribution->commentaire = $request->commentaire; 
-            $attribution->attribute_at = date('Y-m-d H:i:s'); 
+            $attribution->commentaire = $request->commentaire;
+            $attribution->attribute_at = date('Y-m-d H:i:s');
             $query = $attribution->save();
 
             if (!$query) {
@@ -119,16 +119,16 @@ class AttributionsController extends Controller
         if (auth()->user()->current_team_id == 1 || auth()->user()->current_team_id == 2) {
 
         $attribution_id = $request->attribution_id;
-        $attributionDetails = Attribution::find($attribution_id); 
+        $attributionDetails = Attribution::find($attribution_id);
         return response()->json(['details' => $attributionDetails]);
-        
+
         }  // end check
         else {
             return view('dashboard');
         }
     }
 
-  
+
 
     //UPDATE attribution DETAILS
     public function updateattributionDetails(Request $request)
@@ -146,19 +146,19 @@ class AttributionsController extends Controller
             return response()->json(['code' => 0, 'error' => $validator->errors()->toArray()]);
         } else {
 
-            $attribution = Attribution::find($attribution_id); 
+            $attribution = Attribution::find($attribution_id);
                 $attribution->id_materiel = $request->id_materiel;
                 $attribution->id_accessoire = $request->id_accessoire;
                 $attribution->id_employe = $request->id_employe;
                 $attribution->commentaire = $request->commentaire;
-                $attribution->created_at = date('Y-m-d H:i:s'); 
+                $attribution->created_at = date('Y-m-d H:i:s');
                 $query = $attribution->save();
                 if ($query) {
                     return response()->json(['code' => 1, 'msg' => 'Les détails ont été mis à jour']);
                 } else {
                     return response()->json(['code' => 0, 'msg' => 'Priére de revérifier !']);
                 }
-            
+
         } // end else validator
     }
 
