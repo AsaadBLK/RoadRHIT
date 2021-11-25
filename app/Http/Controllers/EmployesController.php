@@ -35,6 +35,7 @@ class EmployesController extends Controller
             $employe = new Employe();
             $employe->nomprenom = $request->nomprenom;
             $employe->matricule = $request->matricule;
+            $employe->fonction = $request->fonction;
             $employe->respH = $request->respH;
             $employe->ville = $request->ville;
             $employe->entityEmp = $request->entityEmp;
@@ -42,7 +43,7 @@ class EmployesController extends Controller
             $employe->status_reqtoIT = "Non envoyé";
             $employe->status_crebyIT = "Non Créée";
             $employe->email = "----";
-            $employe->status_leave = "Active";
+            $employe->status_leave = "Actif";
             $employe->action_by = Auth::user()->name;
             $query = $employe->save();
 
@@ -110,7 +111,7 @@ class EmployesController extends Controller
 
 
 
-    //sendEmailRH employe 
+    //sendEmailRH employe
     public function updateemployeEmails(Request $request)
     {
             $employe_id = $request->cid;
@@ -119,7 +120,7 @@ class EmployesController extends Controller
         if (Str::of($request->status_reqtoIT)->exactly('Envoyé') && (Str::of($employe->status_reqtoIT)->exactly('Non envoyé') )) {
 
             $employe->status_reqtoIT = $request->status_reqtoIT;
-            $employe->email_request_at = date('Y-m-d H:i:s'); 
+            $employe->email_request_at = date('Y-m-d H:i:s');
             $employe->action_by = Auth::user()->name;
             $query = $employe->save();
 
@@ -133,10 +134,10 @@ class EmployesController extends Controller
         } else {
             return response()->json(['code' => 0, 'msg' => 'La demande a été déja envoyé !']);
         }
- 
-        
-       
-         
+
+
+
+
     }
 
 
@@ -151,7 +152,7 @@ class EmployesController extends Controller
             'nomprenom' => 'required|min:3|max:50',
             'matricule' => 'required|min:3|max:50',
             'respH' => 'required|min:3|max:50',
-            'ville' => 'required|min:2|max:50', 
+            'ville' => 'required|min:2|max:50',
         ]);
 
         if (!$validator->passes()) {
@@ -169,18 +170,18 @@ class EmployesController extends Controller
             $employe->entityEmp = $request->entityEmp;
             $employe->businessEmp = $request->businessEmp;
             $employe->status_crebyIT = "Créée";
-            $employe->email_create_at = date('Y-m-d H:i:s'); 
+            $employe->email_create_at = date('Y-m-d H:i:s');
             $employe->email = $request->email;
             $employe->status_leave = $request->status_leave;
             //$employe->action_by = Auth::user()->name;
             $query = $employe->save();
             if ($query) { return response()->json(['code' => 1, 'msg' => 'Les détails ont été mis à jour']);
             } else {  return response()->json(['code' => 0, 'msg' => 'Priére de revérifier !']); }
-        } // end if str 
+        } // end if str
 
             else if (Str::of($request->email)->contains('@sgs.com') && Str::of($request->status_leave)->exactly('Inactif')
                  && Str::of($request->leave_at)->isEmpty()) {
-            
+
                     $employe->nomprenom = $request->nomprenom;
                     $employe->matricule = $request->matricule;
                     $employe->respH = $request->respH;
@@ -201,7 +202,7 @@ class EmployesController extends Controller
             // else if (Str::of($request->status_leave)->exactly('Inactif') && Str::of($request->leave_at)->isNotEmpty) {
             //     return response()->json(['code' => 0, 'msg' => 'Il est déja Inactif !']);
             // }// end else if str
-        
+
         else {
                 return response()->json(['code' => 0, 'msg' => 'Priére de revérifier votre email & Statut départ !']);
             } // end else str

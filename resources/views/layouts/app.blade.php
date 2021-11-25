@@ -546,7 +546,7 @@ a.article:hover {
 <!-- datatable SCRIPT-->
 
         <x-jet-banner />
- 
+
             {{-- @livewire('navigation-menu') --}}
 
 
@@ -561,20 +561,20 @@ a.article:hover {
             <ul class="list-unstyled components">
                 <p>Bienvenu  {{ Auth::user()->currentTeam->name }} !</p>
                 <li class="">
-                  <a href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')"><i class="fa fa-fw fa-home"></i> {{ __('Dashboard') }} </a>
+                  <a href="{{ route('home') }}" :active="request()->routeIs('home')"><i class="fa fa-fw fa-home"></i> {{ __('Dashboard') }} </a>
                 </li>
-               
-                
+
+
                 @if(auth()->user()->current_team_id == 1 || auth()->user()->current_team_id == 2 || auth()->user()->current_team_id == 3)
                 <li class=""><a href="{{ route('employes.employes.list') }}" :active="request()->routeIs('employes.employes.list')"><i class="fa fa-fw fa-user"></i> {{ __('Employés') }}</a>
-                 </li>@endif 
-                 
+                 </li>@endif
 
-                 @if(auth()->user()->current_team_id == 1 || auth()->user()->current_team_id == 2) 
+
+                 @if(auth()->user()->current_team_id == 1 || auth()->user()->current_team_id == 2)
                   <li class="">
-                    <a href="{{ route('materiels.materiels.list') }}" :active="request()->routeIs('materiels.materiels.list')"><i class="fa fa-fw fa-laptop"></i> {{ __('Matériel') }}</a> 
-                </li> 
- 
+                    <a href="{{ route('materiels.materiels.list') }}" :active="request()->routeIs('materiels.materiels.list')"><i class="fa fa-fw fa-laptop"></i> {{ __('Matériel') }}</a>
+                </li>
+
                 <li class="">
                  <a href="{{ route('accessoires.accessoires.list') }}" :active="request()->routeIs('accessoires.accessoires.list')"><i class="fa fa-fw fa-cogs"></i> {{ __('Accessoire') }} </a>
                  </li>
@@ -584,8 +584,8 @@ a.article:hover {
                 <a href="{{ route('attributions.attributions.list') }}" :active="request()->routeIs('attributions.attributions.list')"><i class="fa fa-fw fa-file-pdf-o"></i> {{ __('Attribution') }} </a>
                 </li>
                 @endif
- 
-            </ul> 
+
+            </ul>
         </nav>
 
         <!-- Page Content  -->
@@ -595,18 +595,18 @@ a.article:hover {
                 <div class="container-fluid">
 
                     <button style="background-color:#606164" type="button" id="sidebarCollapse" class="btn btn-secondary">
-                        <i  class="fas fa-align-left"></i> 
+                        <i  class="fas fa-align-left"></i>
                     </button>
                     <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <i class="fas fa-align-justify"></i>
                     </button>
 
                     <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-                       
+
                         <!-- -->
-  
+
   <!-- Primary Navigation Menu -->
-     
+
                 <!-- Teams Dropdown -->
                 @if (Laravel\Jetstream\Jetstream::hasTeamFeatures() && auth()->user()->current_team_id == 1)
                     <div class="ml-3 relative">
@@ -709,7 +709,7 @@ a.article:hover {
                         </x-slot>
                     </x-jet-dropdown>
                 </div>
-            
+
             <!-- Hamburger -->
             {{-- <div class="-mr-2 flex items-center sm:hidden">
                 <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition">
@@ -719,7 +719,7 @@ a.article:hover {
                     </svg>
                 </button>
             </div> --}}
-       
+
 
     <!-- Responsive Navigation Menu -->
     {{-- <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
@@ -834,9 +834,9 @@ a.article:hover {
     </div>
 
 
-             
 
- 
+
+
 
         @stack('modals')
 

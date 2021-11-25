@@ -4,17 +4,17 @@
 
 
 <div class="py-12">
-  
+
 
 <hr class="mt-2 mb-3"/>
  @section('gridtitle', 'Liste des employés')
  @include('layouts.grid')
 <hr class="mt-2 mb-3"/>
- 
-    
+
+
 
           <div class="row" style="margin-top: 45px">
- 
+
               <div class="col-md-12">
                 {{-- <input type="text" name="searchfor" id="" class="form-control"> --}}
                     <div class="card">
@@ -61,7 +61,7 @@
                             <div class="card-body">
                             <form action="{{ route('employes.add.employe') }}" method="post" id="add-employe-form" autocomplete="off">
                                 @csrf
- 
+
                                 <div class="form-group">
                                 <label>Nom Prénom</label>
                                 <input type="text" name="nomprenom" class="form-control" required>
@@ -71,6 +71,11 @@
                                 <label>Matricule</label>
                                 <input type="text" name="matricule" class="form-control" required>
                                 <span class="text-danger error-text matricule_error"></span>
+                                </div>
+                                <div class="form-group">
+                                <label>Fonction</label>
+                                <input type="text" name="fonction" class="form-control" required>
+                                <span class="text-danger error-text fonction_error"></span>
                                 </div>
                                 <div class="form-group">
                                 <label>Responsable hiérarchique</label>
@@ -250,7 +255,7 @@
  </div>
 
 
-                            
+
 
 
                                 <div class="form-group">
@@ -444,7 +449,7 @@
                               if(data.code == 0){
                                   $.each(data.error, function(prefix, val){
                                       $(form).find('span.'+prefix+'_error').text(val[0]);
-                                      
+
                                   });   /* added  to show error */ toastr.error(data.msg);
                               }else{
                                   $('#employes-table').DataTable().ajax.reload(null, false);
@@ -457,7 +462,7 @@
                 });
 
 
-                
+
                 //DELETE employe RECORD
                 $(document).on('click','#deleteEmployeBtn', function(){
                     var employe_id = $(this).data('id');

@@ -75,7 +75,9 @@ Route::post('/deleteSelectedattributions', [AttributionsController::class, 'dele
 
 
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('index');
+Route::get('/home', [DashboardController::class, 'index'])->name('home');
+
+//Route::get('/dashboard', [DashboardController::class, 'display'])->name('dashboard');
 
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {

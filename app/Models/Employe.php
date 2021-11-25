@@ -25,6 +25,7 @@ class Employe extends Model
         'action_by',
         'entityEmp',
         'businessEmp',
+        'fonction',
 
     ];
 
