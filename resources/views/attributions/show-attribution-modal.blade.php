@@ -6,7 +6,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body w-full">
 
                  <form action="<?= route('attributions.update.attribution.details') ?>" method="post" id="update-attribution-form">
                     @csrf
@@ -127,7 +127,7 @@
 	<tr>
 		<td style="border-top: 2px solid #000000; border-bottom: 1px solid #000000; border-left: 2px solid #000000; border-right: 1px solid #000000" colspan=2 height="21" align="left" valign=bottom bgcolor="#FFFFFF"><b><font size=3 color="#000000">Nom et pr&eacute;nom:</font></b></td>
 		<td style="border-top: 2px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 2px solid #000000" colspan=8 align="center" valign=bottom bgcolor="#FFFFFF"><b><font size=3 color="#000000">
-        
+
 <select class="form-control select" name="id_employe" disabled="disabled" style="color:#000000;background-color:#fff;border:none;font-weight:bold;height:30px;text-align:center;">
 @if ($empls->count())
 @foreach($empls as $empl)
@@ -135,13 +135,13 @@
 @endforeach
 @endif
 </select>
-            
+
         </font></b></td>
 		</tr>
 	<tr>
 		<td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 2px solid #000000; border-right: 1px solid #000000" colspan=2 height="21" align="left" valign=bottom bgcolor="#FFFFFF"><b><font size=3 color="#000000">Division D&eacute;partement:</font></b></td>
 		<td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 2px solid #000000" colspan=8 align="center" valign=bottom bgcolor="#FFFFFF"><b><font size=3 color="#000000">
-        
+
             <select class="form-control select" name="id_employe" disabled="disabled" style="color:#000000;background-color:#fff;border:none;font-weight:bold;height:30px;text-align:center;">
 @if ($empls->count())
 @foreach($empls as $empl)

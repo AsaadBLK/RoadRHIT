@@ -27,7 +27,11 @@ class DashboardController extends Controller
             $attr = Attribution::where('deleted_at', '=', null)->count();
             return view('home', compact('countempls', 'maters', 'acces', 'attr'));
         } else {
-            return view('employes.employes-list');
+            $countempls = Employe::where('status_leave', '=', 'Actif')->count();
+            $maters = 0;
+            $acces = 0;
+            $attr = 0;
+            return view('home', compact('countempls', 'maters', 'acces', 'attr'));
         }
         }
 
@@ -41,7 +45,11 @@ class DashboardController extends Controller
             $attr = Attribution::where('deleted_at', '=', null)->count();
             return view('dashboard', compact('countempls', 'maters', 'acces', 'attr'));
         } else {
-            return view('employes.employes-list');
+            $countempls = Employe::where('status_leave', '=', 'Actif')->count();
+            $maters = 0;
+            $acces = 0;
+            $attr = 0;
+            return view('home', compact('countempls', 'maters', 'acces', 'attr'));
         }
     }
 
