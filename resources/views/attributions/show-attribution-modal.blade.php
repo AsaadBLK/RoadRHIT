@@ -2,18 +2,29 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
+
+ 
+{{-- <button id="downloadPdfBtn" onclick="tableToExcel('xlsx')" style="float:left;">dwn pdf</button> 
+  <script>
+        $("#downloadPdfBtn").click(function (e) {
+           window.open('data:application/vnd.ms-excel,' + encodeURIComponent($('div[id=contentToPrint]').html()));
+            e.preventDefault();
+        });
+    </script> --}}
+
+
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                    <span aria-hidden="true">&times;</span>  </button>
             </div>
-            <div class="modal-body w-full">
+
+            <div id="editor"></div>
+            <div id="contentToPrint" class="modal-body w-full">
 
                  <form action="<?= route('attributions.update.attribution.details') ?>" method="post" id="update-attribution-form">
                     @csrf
                      <input type="hidden" name="cid">
                  </form>
-
-
+ 
 
 
 <table align="center" cellspacing="0" border="0">
@@ -314,4 +325,6 @@
             </div>
         </div>
     </div>
+ 
 </div>
+

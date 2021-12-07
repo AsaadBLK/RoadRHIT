@@ -96,7 +96,7 @@ class AttributionsController extends Controller
                 return '<div class="btn-group">
         <button class="btn btn-sm btn-primary" data-id="' . $row['id'] . '" id="editAttributionBtn"><span class="material-icons">construction</span></button>
         <button class="btn btn-sm btn-danger" data-id="' . $row['id'] . '" id="deleteAttributionBtn"><span class="material-icons">delete_sweep</span></button>
-       <button class="btn btn-sm btn-secondary" data-id="' . $row['id'] . '" id="showAttributionBtn"><span class="material-icons">file_present</span></button>
+       <!--button class="btn btn-sm btn-secondary" data-id="' . $row['id'] . '" id="showAttributionBtn"><span class="material-icons">file_present</span></!--button>
          </div>';
             })
             ->addColumn('checkbox', function ($row) {

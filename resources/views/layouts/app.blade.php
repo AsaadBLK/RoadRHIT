@@ -530,9 +530,13 @@ a.article:hover {
     <body class="font-sans antialiased">
 
 
-<!-- dev tool SCRIPT -->
-         {{-- <script type="application/javascript" src="https://github.com/mozilla/webextension-polyfill"></script> --}}
-<!-- dev tool SCRIPT -->
+<!-- tool export -->
+   {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script> --}}
+   <script src="https://unpkg.com/jspdf@latest/dist/jspdf.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-rc.7/dist/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspdf-html2canvas@latest/dist/jspdf-html2canvas.min.js"></script>
+ 
+<!-- tool export -->
 
 
 <!-- datatable SCRIPT -->
