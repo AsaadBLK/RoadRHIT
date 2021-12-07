@@ -1,5 +1,4 @@
-
-Laravel 8 Employment & Materiels .. management system.
+Laravel 8 Employment, Materiels, Accessories, assignment management system.
 
 Using Jetstream, Ajax, Bootstrap modals, sweetalert2, Jquery, dataTables 2022. 
 <br>
