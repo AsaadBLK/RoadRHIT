@@ -75,7 +75,8 @@ class AttributionsController extends Controller
 
         if (auth()->user()->current_team_id == 1 || auth()->user()->current_team_id == 2) {
 
-        $attributions = DB::select(DB::raw("
+        $attributions = DB::select(DB::raw(
+            "
             SELECT att.id , businessEmp, nomprenom , designation, access_name, attribute_at, att.commentaire
             FROM attributions AS att
             INNER JOIN
@@ -86,7 +87,8 @@ class AttributionsController extends Controller
             ON att.id_accessoire = acc.id
             INNER JOIN
             materiels mater
-            ON att.id_materiel=mater.id"));
+            ON att.id_materiel=mater.id
+            where att.deleted_at IS NULL"));
 
         //Attribution::all();
         //return DataTables::of($attributions)
